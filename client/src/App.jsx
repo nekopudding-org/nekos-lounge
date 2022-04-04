@@ -51,8 +51,6 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Paper sx={{height: 500, width: 500}}/>
-        <Checkbox defaultChecked />
         <Hot />
       </ThemeProvider>
     </>

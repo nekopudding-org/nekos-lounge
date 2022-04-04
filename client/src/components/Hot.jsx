@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Box} from '@mui/material'
+import Carousel from 'react-material-ui-carousel'
 
 function Hot() {
     const hotList = ['donut', 'spacegame']
@@ -26,6 +27,11 @@ function Hot() {
             ]}>
                 {currHot}
             </Box>
+            <Carousel>
+                <Box sx={{height:200, width: 200, backgroundColor: 'primary.dark'}} />
+                <Box sx={{height:200, width: 200, backgroundColor: 'primary.dark'}} />
+                <Box sx={{height:200, width: 200, backgroundColor: 'primary.dark'}} />
+            </Carousel>
         </>
     )
 }
