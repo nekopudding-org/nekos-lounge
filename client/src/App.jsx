@@ -1,8 +1,9 @@
 import logo from './logo.svg';
-import Hot from './components/Hot';
 import { CssBaseline, Checkbox, Paper } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, orange } from '@mui/material/colors';
+
+import TrendingCarousel from './components/TrendingCarousel';
 
 const theme = createTheme({
   palette: {
@@ -51,7 +52,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Hot />
+        <TrendingCarousel />
       </ThemeProvider>
     </>
   );
