@@ -44,9 +44,14 @@ function TrendingCarousel(props) {
                     indicatorContainerProps={{
                         style: {
                             position: 'absolute',
+                            pointerEvents: 'none',
                             marginTop: '-30px',
                         }
-
+                    }}
+                    indicatorIconButtonProps={{
+                        style: {
+                            pointerEvents: 'auto',
+                        }
                     }}
                 >
                     {trendingList.map((item,index) => {
