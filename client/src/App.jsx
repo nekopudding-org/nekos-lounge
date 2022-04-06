@@ -1,9 +1,10 @@
 import logo from './logo.svg';
-import { CssBaseline, Checkbox, Paper } from '@mui/material'
+import { CssBaseline, Checkbox, Paper, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, orange } from '@mui/material/colors';
 
 import TrendingCarousel from './components/TrendingCarousel';
+import "@fontsource/open-sans";
 
 const theme = createTheme({
   palette: {
@@ -43,8 +44,25 @@ const theme = createTheme({
       main: '##c27814',
       light: '##d29e33',
       dark: '#b0560a'
-    }
+    },
   },
+  typography: {
+    fontFamily:"Open Sans",
+
+    card: {
+      fontSize: 100,
+      fontWeight: 900,
+      color: 'white'
+    },
+    content: {
+
+    },
+    title: {
+
+    }
+
+  }
+  
 });
 
 function App() {
@@ -52,7 +70,10 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <TrendingCarousel />
+        <TrendingCarousel width={600} height={800}/>
+        <Typography variant="h2" gutterBottom>
+          Welcome to React
+        </Typography>
       </ThemeProvider>
     </>
   );

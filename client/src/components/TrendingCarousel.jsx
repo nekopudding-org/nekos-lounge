@@ -49,7 +49,7 @@ function TrendingCarousel(props) {
                         }
                     }}
                     indicatorIconButtonProps={{
-                        style: {
+                        sx: {
                             pointerEvents: 'auto',
                         }
                     }}

@@ -12,21 +12,28 @@ function TrendingItem(props) {
                     height:props.height, 
                     justifyContent: 'center',
                     textAlign: 'center',
-                    '&:hover': {
-                        filter: `brightness(${props.hoverBrightness})`
-                    }
+                    filter: `brightness(${props.brightness})`,
+                        '&:hover': {
+                            filter: `brightness(${props.hoverBrightness})`
+                        }
                 }}
                 onMouseEnter={()=>setIsHovering(true)}
                 onMouseLeave={()=>setIsHovering(false)}
             >
-                <CardHeader title={props.name} sx={{
+                <CardHeader title={props.name} 
+                    sx={{
                         position:'fixed', 
                         width: props.width, 
                         height: props.height, 
                         mx:'auto',
                         color: common.black,
-                        visibility: isHovering ? 'visible' : 'hidden'
-                    }}/>
+                        visibility: isHovering ? 'visible' : 'hidden',
+                        // backgroundImage: `url(${process.env.PUBLIC_URL + props.imgURL}})`
+                    }}
+                    titleTypographyProps={{ 
+                        variant:'card',
+                    }}
+                    />
                 <CardMedia
                     component="img"
                     image={process.env.PUBLIC_URL + props.imgURL}
@@ -34,7 +41,7 @@ function TrendingItem(props) {
                     sx={{
                         height: props.height,
                         width: props.width,
-                        objectFit: 'cover'
+                        objectFit: 'cover',
                     }}
                 />
                 <CardActions>
@@ -52,6 +59,7 @@ TrendingItem.defaultProps = {
     imgURL:"https://via.placeholder.com/300x400",
     description: 'placeholder image',
     link: "https://via.placeholder.com/300x400",
-    hoverBrightness: 0.6
+    hoverBrightness: 0.5,
+    brightness: 0.7
 }
 export default TrendingItem
