@@ -1,75 +1,60 @@
 import React, { useState } from 'react';
-import { AppBar,Box,Toolbar,IconButton,Typography,Button, Drawer } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar,Box,Toolbar,IconButton,Typography,Button} from '@mui/material'
 import theme from '../../theme';
+import MenuIcon from "@mui/icons-material/Menu";
 
-const drawerWidth = 240;
 
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-function Header() {
-  const [open, setOpen] = useState(false);    
+function Header(props) {
+  const {drawerOpen, drawerWidth} = props;
   return (
   <>
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position='fixed' sx={{ 
+          ml: drawerOpen ? props.drawerWidth : 0, 
+          width: drawerOpen ?  `calc(100% - ${drawerWidth}px)` : '100%',
+          boxShadow:0,
+          transition: theme.transitions.create(["width", "margin"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+            }),
+          ...(drawerOpen && {
+            marginLeft: drawerWidth,
+            width: `calc(100% - ${drawerWidth}px)`,
+            transition: theme.transitions.create(["width", "margin"], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen
+            })
+          })
+        }}
+      >
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
             color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+            aria-label="open drawer"
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(drawerOpen && { display: "none" })
+            }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+          <Box sx={{flexGrow:1}}>
+            <Typography variant="h6" component="div" nowrap>
+              Neko's Lounge
+            </Typography>
+          </Box>
+
+          <Box sx={{flexGrow:0}}>
+            <Button color="inherit">Login</Button>
+          </Box>
         </Toolbar>
       </AppBar>
-    </Box>
-    <Drawer 
-      sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          whiteSpace: 'nowrap',
-          boxSizing: 'border-box',
-          ...(open && {
-          ...openedMixin(theme),
-          '& .MuiDrawer-paper': openedMixin(theme),
-          }),
-          ...(!open && {
-          ...closedMixin(theme),
-          '& .MuiDrawer-paper': closedMixin(theme),
-          })
-      }}
-      variant='permanent'
-    >
-          dasfaskdf
-      </Drawer>
     </>
   )
 }
 
+Header.defaultProps = {
+  drawerWidth: 240,
+  drawerOpen: false
+}
 export default Header;
