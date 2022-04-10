@@ -47,7 +47,7 @@ function Header(props) {
           </Box>
 
           <Box sx={{flexGrow:0}}>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit"><Typography variant='body2'>Login</Typography></Button>
           </Box>
         </Toolbar>
       </AppBar>

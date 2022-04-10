@@ -9,8 +9,9 @@ const Main = () => {
     sx={{ 
       display: 'flex',  
       flexGrow: 1, 
-      p: 3, 
+      py: 3, 
       mt: '45px',
+      mr: 3
   }}>
     <Box sx={{height: '800px', flexGrow: 1}}>
       <PostsSection></PostsSection>

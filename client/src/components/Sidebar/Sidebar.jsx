@@ -13,14 +13,6 @@ import { borderRadius } from '@mui/system';
 
 const drawerWidth = 240;
 
-const Root = styled(Drawer)(({ theme }) => ({
-  [theme.breakpoints.down('sx')]: {
-    width: '100%',
-    position: 'fixed',
-    backgroundColor: 'red'
-  }
-}));
-
 const openedMixin = (theme) => ({
   width: {sm: '100%', md: drawerWidth},
   
@@ -65,7 +57,7 @@ function Sidebar(props) {
       }}
       variant='permanent'
     >
-          <List>
+          <List sx={{pt:0}}>
 
           <ListItemButton
               onClick={()=>setDrawerOpen(prev => !prev)}

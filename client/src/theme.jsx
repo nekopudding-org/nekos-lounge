@@ -9,7 +9,8 @@ const theme = createTheme({
       },
       background: {
         default: '#242c49',
-        paper: '#324470'
+        paper: '#324470',
+        dark: '#161a2b'
       },
       primary: {
         main: '#35418c',
@@ -43,7 +44,10 @@ const theme = createTheme({
       },
     },
     typography: {
-      fontFamily:"Open Sans",
+      allVariants: {
+        fontFamily:"Open Sans",
+        color: '#e2e2e2',
+      },
   
       card: {
         fontWeight: 300,
