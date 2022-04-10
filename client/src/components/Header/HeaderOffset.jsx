@@ -1,7 +1,7 @@
 import { styled, useTheme } from "@mui/material/styles";
 
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+const HeaderOffset = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -10,4 +10,4 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 
-export default DrawerHeader;
+export default HeaderOffset;

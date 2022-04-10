@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { styled } from '@mui/material/styles';
 
 
 import theme from '../../theme';
@@ -12,12 +13,22 @@ import { borderRadius } from '@mui/system';
 
 const drawerWidth = 240;
 
+const Root = styled(Drawer)(({ theme }) => ({
+  [theme.breakpoints.down('sx')]: {
+    width: '100%',
+    position: 'fixed',
+    backgroundColor: 'red'
+  }
+}));
+
 const openedMixin = (theme) => ({
-  width: drawerWidth,
+  width: {sm: '100%', md: drawerWidth},
+  
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
+
   overflowX: 'hidden',
 });
 
@@ -28,9 +39,7 @@ const closedMixin = (theme) => ({
   }),
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
+  
 });
 
 function Sidebar(props) {
@@ -78,7 +87,7 @@ function Sidebar(props) {
                 {drawerOpen ? <ChevronLeftIcon/> : <MenuIcon />}
               </ListItemIcon>
             </ListItemButton>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Home', 'Featured', 'Projects List', 'Campfire', 'Music'].map((text, index) => (
             <>
             <ListItemButton
               key={text}

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppBar,Box,Toolbar,IconButton,Typography,Button} from '@mui/material'
 import theme from '../../theme';
 import MenuIcon from "@mui/icons-material/Menu";
 
 
 function Header(props) {
-  const {drawerOpen, drawerWidth} = props;
+  const {drawerOpen, drawerWidth, setDrawerOpen} = props;
   return (
   <>
       <AppBar position='fixed' sx={{ 
           ml: drawerOpen ? props.drawerWidth : 0, 
+          p: 0,
           width: drawerOpen ?  `calc(100% - ${drawerWidth}px)` : '100%',
           boxShadow:0,
           transition: theme.transitions.create(["width", "margin"], {
@@ -26,15 +27,16 @@ function Header(props) {
           })
         }}
       >
-        <Toolbar>
+        <Toolbar variant='dense'>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             sx={{
-              marginRight: 5,
+              mr: 5,
               ...(drawerOpen && { display: "none" })
             }}
+            onClick={()=> setDrawerOpen(true)}
           >
             <MenuIcon />
           </IconButton>

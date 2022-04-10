@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material";
+import { dark } from "@mui/material/styles/createPalette";
 
 const theme = createTheme({
+    mode: dark,
     palette: {
       text: {
         primary: '#e2e2e2'
@@ -44,19 +46,16 @@ const theme = createTheme({
       fontFamily:"Open Sans",
   
       card: {
-        fontSize: 100,
-        fontWeight: 900,
+        fontWeight: 300,
         color: 'white'
       },
       content: {
   
       },
       title: {
-  
+        fontWeight: 800
       }
-  
-    }
-    
+    },
   });
 
 export default theme;

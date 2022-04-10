@@ -64,6 +64,7 @@ function TrendingCarousel(props) {
                                 imgURL={item.imageURL}
                                 description={item.description}
                                 link={item.link}
+                                fontSize={props.fontSize}
                         />
                         )
                     })}
@@ -77,6 +78,7 @@ TrendingCarousel.defaultProps = {
     width: 300,
     height: 400,
     transitionTime: 100,
+    fontSize: 50,
     autoPlayInterval: 10000,
     autoPlay: false
 }

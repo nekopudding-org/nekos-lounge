@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
-import { Card,CardMedia,CardActions,CardHeader } from '@mui/material'
+import { Card,CardMedia,CardActions,CardHeader, CardContent,Box } from '@mui/material'
 import { common } from '@mui/material/colors'
+import { typography } from '@mui/system';
+import theme from '../../theme';
+
 
 function TrendingItem(props) {
     const [isHovering,setIsHovering] = useState(false);
@@ -12,28 +15,31 @@ function TrendingItem(props) {
                     height:props.height, 
                     justifyContent: 'center',
                     textAlign: 'center',
-                    filter: `brightness(${props.brightness})`,
-                        '&:hover': {
-                            filter: `brightness(${props.hoverBrightness})`
-                        }
+                    backgroundColor: common.black,
                 }}
                 onMouseEnter={()=>setIsHovering(true)}
                 onMouseLeave={()=>setIsHovering(false)}
-            >
-                <CardHeader title={props.name} 
+            >      
+                <CardHeader 
+                    title={props.name} 
                     sx={{
-                        position:'fixed', 
+                        position:'absolute', 
                         width: props.width, 
                         height: props.height, 
                         mx:'auto',
                         color: common.black,
-                        visibility: isHovering ? 'visible' : 'hidden',
-                        // backgroundImage: `url(${process.env.PUBLIC_URL + props.imgURL}})`
+                        background: 'none',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
                     }}
                     titleTypographyProps={{ 
                         variant:'card',
+                        visibility: isHovering ? 'visible' : 'hidden',
+                        pointerEvents: 'none',
+                        typography: theme.typography.title,
+                        fontSize: props.fontSize,
                     }}
-                    />
+                />
                 <CardMedia
                     component="img"
                     image={process.env.PUBLIC_URL + props.imgURL}
@@ -42,8 +48,14 @@ function TrendingItem(props) {
                         height: props.height,
                         width: props.width,
                         objectFit: 'cover',
-                    }}
-                />
+                        opacity: props.brightness,
+                        '&:hover': {
+                            opacity: props.hoverBrightness,
+                            zIndex: -9999
+                        }
+                }}/>
+
+                <CardContent ></CardContent>
                 <CardActions>
                     
                 </CardActions>
