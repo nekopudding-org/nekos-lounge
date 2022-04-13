@@ -19,6 +19,7 @@ const Footer = () => {
         <Stack sx={{
           padding: '20px 50px',
           backgroundColor: theme.palette.background.dark,
+          flexGrow: 0
         }}>
           <Stack direction='row' sx={{ margin: '0 auto', my: 2}} spacing={8}>
             {links.map((item,index) => {

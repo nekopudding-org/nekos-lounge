@@ -12,7 +12,7 @@ function Header(props) {
           ml: drawerOpen ? props.drawerWidth : 0, 
           p: 0,
           width: drawerOpen ?  `calc(100% - ${drawerWidth}px)` : '100%',
-          boxShadow:0,
+          boxShadow:2,
           transition: theme.transitions.create(["width", "margin"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -24,7 +24,8 @@ function Header(props) {
               easing: theme.transitions.easing.sharp,
               duration: theme.transitions.duration.enteringScreen
             })
-          })
+          }),
+          backgroundColor: theme.palette.background.light,
         }}
       >
         <Toolbar variant='dense'>

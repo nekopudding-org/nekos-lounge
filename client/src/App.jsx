@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import { Box, CssBaseline } from '@mui/material'
+import {useState, useEffect, React} from 'react';
+import { Box, CssBaseline,Stack } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
 import Header from './components/Header/Header';
@@ -12,19 +12,23 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(()=> {
+    // document.documentElement.style.setProperty('--base',this.state.color);
+  },[])
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-          <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
+        <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
+        <Stack sx={{ flexFlow: 'row nowrap', minWidth: '100vw', minHeight: '100vh'}}>
           <Sidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
-          <Box sx={{flexGrow: 1, display:'flex', flexDirection:'column'}}> 
+          <Stack sx={{flexGrow: 1}}> 
             <Main/>
             <Footer/>
-          </Box>
+          </Stack>
 
-        </Box>
+        </Stack>
 
       </ThemeProvider>
     </>

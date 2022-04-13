@@ -14,7 +14,7 @@ import { borderRadius } from '@mui/system';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
-  width: {sm: '100%', md: drawerWidth},
+  width: {xs: '100%', md: drawerWidth},
   
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -56,6 +56,7 @@ function Sidebar(props) {
         })
       }}
       variant='permanent'
+      PaperProps={{sx: {bgcolor: theme.palette.background.sidebar}}}
     >
           <List sx={{pt:0}}>
 

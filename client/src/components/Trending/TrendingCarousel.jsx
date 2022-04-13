@@ -14,9 +14,9 @@ function TrendingCarousel(props) {
         },
         {
             name:'Spacegame', 
-            // link: '',
-            // imageURL: '',
-            // description: 'spacegame - 2D platformer game'
+            link: '',
+            imageURL: 'images/spacegame.png',
+            description: 'spacegame - 2D platformer game'
         }
     ]
 
@@ -25,17 +25,18 @@ function TrendingCarousel(props) {
             <Box sx={
                     { 
                         mr: 2, 
-                        backgroundColor: 'primary.main',
+                        backgroundColor: 'background.paper',
                         width: props.width,
                         height: props.height,
+                        display: {xs: 'none', md: 'block'}
                     }
                 }
             >
                 <Carousel 
                     autoPlay={props.autoPlay}
                     stopAutoPlayOnHover 
+                    animation='fade'
                     interval={props.autoPlayInterval} 
-                    animation='slide'
                     timeout={props.transitionTime}
                     swipe
                     indicators
@@ -77,9 +78,9 @@ function TrendingCarousel(props) {
 TrendingCarousel.defaultProps = {
     width: 300,
     height: 400,
-    transitionTime: 100,
+    transitionTime: 300,
     fontSize: 50,
-    autoPlayInterval: 10000,
-    autoPlay: false
+    autoPlayInterval: 7000,
+    autoPlay: true
 }
 export default TrendingCarousel;

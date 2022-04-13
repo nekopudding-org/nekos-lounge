@@ -9,7 +9,9 @@ const theme = createTheme({
       },
       background: {
         default: '#242c49',
-        paper: '#324470',
+        light: '#324470',
+        paper: '#29385c',
+        sidebar: '#3e5385',
         dark: '#161a2b'
       },
       primary: {
@@ -59,7 +61,7 @@ const theme = createTheme({
       title: {
         fontWeight: 800
       }
-    },
+    }
   });
 
 export default theme;
