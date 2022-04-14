@@ -1,4 +1,5 @@
 import { Pagination, Paper,Box, Stack, Divider, Typography } from '@mui/material'
+import { bgcolor } from '@mui/system'
 import React from 'react'
 import theme from 'theme'
 
@@ -35,7 +36,17 @@ function PostsSection() {
         </Stack>
       </Paper>
       <Box sx={{justifyContent:"center", display:'flex'}}>
-        <Pagination count={5} color="secondary"/>
+        <Pagination 
+          count={5} 
+          color="secondary" 
+          sx={{ 
+            '& .MuiPaginationItem-root.Mui-selected': {
+              bgcolor: theme.palette.secondary.main //don't change color if selected
+            },
+            '& .MuiPaginationItem-root:not(.Mui-selected):hover': {
+              bgcolor: theme.palette.background.light
+            }
+        }}/>
       </Box>
     </Stack>
       

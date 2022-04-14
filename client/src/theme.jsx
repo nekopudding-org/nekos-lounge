@@ -64,19 +64,6 @@ const theme = createTheme({
         fontWeight: 800
       }
     },
-    // components: {
-    //   MuiListItemButton: {
-    //     styleOverrides: {
-    //       root: {
-    //         backgroundColor: 'yellow',
-    //         selected: {
-    //           backgroundColor: 'black !important'
-    //         },
-            
-    //       },
-    //     },
-    //   },
-    // },
   });
 
 export default theme;

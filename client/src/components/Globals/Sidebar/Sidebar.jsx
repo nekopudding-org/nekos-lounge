@@ -34,17 +34,7 @@ const closedMixin = (theme) => ({
   }),
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
-  
 });
-
-const SidebarItem = styled(ListItemButton)(({ theme }) => ({
-
-  color: 'red !important',
-  '&.Mui-selected': {
-    backgroundColor: 'blue !important',
-  }
-}));
-
 
 ///////////////////////////////////////////////           MAIN CONTENT            /////////////
 const pageList = [
