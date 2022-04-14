@@ -1,6 +1,6 @@
 import { Pagination, Paper,Box, Stack, Divider, Typography } from '@mui/material'
 import React from 'react'
-import theme from '../../theme'
+import theme from 'theme'
 
 const postList = [
   {
@@ -19,18 +19,18 @@ const postList = [
 function PostsSection() {
   return (
     <>
-    <Stack spacing={2} sx={{flexGrow:1}}>
-      <Paper elevation={3} sx={{mx: 2}}>
+    <Stack spacing={4} sx={{flexGrow:1}}>
+      <Paper elevation={3} sx={{mx: 0}}>
         <Stack>
           {postList.map((item, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
             <Box sx={{maxWidth:'60rem', py:2, px:3}}>
               <Typography variant="h6" noWrap>{item.title}</Typography>
               <Typography variant="body2" paragraph noWrap>{item.content}</Typography>
             </Box>
             <Divider sx={{borderBottomWidth: '2px'}}/>
-            </>
+            </React.Fragment>
           )})}
         </Stack>
       </Paper>

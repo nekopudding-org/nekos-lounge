@@ -1,16 +1,18 @@
 import {Box, Stack} from '@mui/material';
-import HeaderOffset from './Header/HeaderOffset';
-import PostsSection from './Posts/PostsSection';
+import PostsSection from 'components/Main/Posts/PostsSection';
 import TrendingCarousel from './Trending/TrendingCarousel';
 
 const Main = () => {
   return (
   <Stack
+    direction='row'
+    spacing={4}
     sx={{ 
-      flexFlow: 'row nowrap',
+      flexWrap: 'nowrap',
       flex: '1 1 auto',
-      py: 3, 
-      mt: '45px',
+      mx: 4,
+      mt: 13,
+      mb: 5
   }}>
       <PostsSection/>
     <TrendingCarousel fontSize={30}/>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar,Box,Toolbar,IconButton,Typography,Button} from '@mui/material'
-import theme from '../../theme';
 import MenuIcon from "@mui/icons-material/Menu";
 
+import theme from 'theme';
 
 function Header(props) {
   const {drawerOpen, drawerWidth, setDrawerOpen} = props;
@@ -42,7 +42,7 @@ function Header(props) {
             <MenuIcon />
           </IconButton>
           <Box sx={{flexGrow:1}}>
-            <Typography variant="h6" component="div" nowrap>
+            <Typography variant="h6" component="div" noWrap>
               Neko's Lounge
             </Typography>
           </Box>

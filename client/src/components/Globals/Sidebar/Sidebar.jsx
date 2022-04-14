@@ -1,20 +1,18 @@
 import React, {useState} from 'react'
-import {Drawer, IconButton, List, Stack, ListItemIcon, ListItemButton,ListItemText,Divider} from '@mui/material'
+import {Drawer, List, ListItemIcon, ListItemButton,ListItemText,Divider} from '@mui/material'
+import {alpha, styled} from '@mui/styles'
+import { Link } from 'react-router-dom';
+import { common } from '@mui/material/colors';
+import { borderRadius } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import FireplaceIcon from '@mui/icons-material/Fireplace';
 import HomeIcon from '@mui/icons-material/Home';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import TimerIcon from '@mui/icons-material/Timer';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import { styled } from '@mui/material/styles';
 
-
-import theme from '../../theme';
-import { common } from '@mui/material/colors';
-import { borderRadius } from '@mui/system';
+import theme from 'theme';
 
 const drawerWidth = 240;
 
@@ -39,15 +37,30 @@ const closedMixin = (theme) => ({
   
 });
 
+const SidebarItem = styled(ListItemButton)(({ theme }) => ({
+
+  color: 'red !important',
+  '&.Mui-selected': {
+    backgroundColor: 'blue !important',
+  }
+}));
+
+
+///////////////////////////////////////////////           MAIN CONTENT            /////////////
+const pageList = [
+  {title: 'Home', icon: HomeIcon, route: '/'},
+  {title: 'Featured', icon: StarOutlineIcon, route: '/featured'}, 
+  {title: 'Campfire', icon: FireplaceIcon, route: '/campfire'},
+  {title: 'Music', icon: MusicNoteIcon, route: '/music'},
+  {title: 'Timer', icon: TimerIcon, route: '/timer'}
+]
+
 function Sidebar(props) {
   const {drawerOpen, setDrawerOpen} = props; 
-  const pageList = [
-    {title: 'Home', icon: HomeIcon},
-    {title: 'Featured', icon: StarOutlineIcon}, 
-    {title: 'Campfire', icon: FireplaceIcon},
-    {title: 'Music', icon: MusicNoteIcon},
-    {title: 'Timer', icon: TimerIcon}
-  ]
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const handleListItemClick = (index) => {
+    setSelectedIndex(index);
+  };
 
   return (
     <>
@@ -93,28 +106,38 @@ function Sidebar(props) {
               </ListItemIcon>
             </ListItemButton>
           {pageList.map((item, index) => (
-            <>
-            <ListItemButton
-              key={item.title}
-              sx={{
-                minHeight: 48,
-                justifyContent: drawerOpen ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <React.Fragment key={index}>
+            <Link to={item.route}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: drawerOpen ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: drawerOpen ? 'initial' : 'center',
+                  px: 2.5,
+                  '&:hover': {
+                    bgcolor: theme.palette.background.sidebarHover,
+                  },
+                  '&.Mui-selected:hover, &.Mui-selected': {
+                    bgcolor: theme.palette.background.sidebarSelected,
+                  },
                 }}
+                disableRipple
+                selected={selectedIndex === index}
+                onClick={() => handleListItemClick(index)}
               >
-              <item.icon />
-              </ListItemIcon>
-              <ListItemText primary={item.title} sx={{ opacity: drawerOpen ? 1 : 0 }} />
-            </ListItemButton>
-            <Divider />
-            </>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: drawerOpen ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                <item.icon />
+                </ListItemIcon>
+                <ListItemText primary={item.title} sx={{ opacity: drawerOpen ? 1 : 0 }} />
+              </ListItemButton>
+            </Link>
+            <Divider/>
+            </React.Fragment>
             
           ))}
         </List>

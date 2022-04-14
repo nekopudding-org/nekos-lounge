@@ -12,6 +12,8 @@ const theme = createTheme({
         light: '#324470',
         paper: '#29385c',
         sidebar: '#3e5385',
+        sidebarHover: '#364978',
+        sidebarSelected: '#373f70',
         dark: '#161a2b'
       },
       primary: {
@@ -61,7 +63,20 @@ const theme = createTheme({
       title: {
         fontWeight: 800
       }
-    }
+    },
+    // components: {
+    //   MuiListItemButton: {
+    //     styleOverrides: {
+    //       root: {
+    //         backgroundColor: 'yellow',
+    //         selected: {
+    //           backgroundColor: 'black !important'
+    //         },
+            
+    //       },
+    //     },
+    //   },
+    // },
   });
 
 export default theme;

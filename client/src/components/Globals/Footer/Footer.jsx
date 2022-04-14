@@ -4,7 +4,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import theme from '../../theme';
+import theme from 'theme';
 
 
 const Footer = () => {
@@ -24,9 +24,8 @@ const Footer = () => {
           <Stack direction='row' sx={{ margin: '0 auto', my: 2}} spacing={8}>
             {links.map((item,index) => {
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     <Link 
-                      key={index}
                       underline="none"
                       href={item.href}
                       target="_blank" 
@@ -34,7 +33,7 @@ const Footer = () => {
                     >
                       <item.icon fontSize='large' sx={{ '&:hover': {color:theme.palette.primary.light}}}/>
                     </Link>
-                  </>
+                  </React.Fragment>
                 )
               })}
           </Stack>
