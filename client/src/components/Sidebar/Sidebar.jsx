@@ -4,6 +4,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import FireplaceIcon from '@mui/icons-material/Fireplace';
+import HomeIcon from '@mui/icons-material/Home';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import TimerIcon from '@mui/icons-material/Timer';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { styled } from '@mui/material/styles';
 
 
@@ -36,6 +41,13 @@ const closedMixin = (theme) => ({
 
 function Sidebar(props) {
   const {drawerOpen, setDrawerOpen} = props; 
+  const pageList = [
+    {title: 'Home', icon: HomeIcon},
+    {title: 'Featured', icon: StarOutlineIcon}, 
+    {title: 'Campfire', icon: FireplaceIcon},
+    {title: 'Music', icon: MusicNoteIcon},
+    {title: 'Timer', icon: TimerIcon}
+  ]
 
   return (
     <>
@@ -80,10 +92,10 @@ function Sidebar(props) {
                 {drawerOpen ? <ChevronLeftIcon/> : <MenuIcon />}
               </ListItemIcon>
             </ListItemButton>
-          {['Home', 'Featured', 'Projects List', 'Campfire', 'Music'].map((text, index) => (
+          {pageList.map((item, index) => (
             <>
             <ListItemButton
-              key={text}
+              key={item.title}
               sx={{
                 minHeight: 48,
                 justifyContent: drawerOpen ? 'initial' : 'center',
@@ -97,9 +109,9 @@ function Sidebar(props) {
                   justifyContent: 'center',
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <item.icon />
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: drawerOpen ? 1 : 0 }} />
+              <ListItemText primary={item.title} sx={{ opacity: drawerOpen ? 1 : 0 }} />
             </ListItemButton>
             <Divider />
             </>
