@@ -1,5 +1,5 @@
 import {useState, useEffect, React} from 'react';
-import { CssBaseline,Stack } from '@mui/material'
+import { CssBaseline,Stack} from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
 import "@fontsource/open-sans";
@@ -14,8 +14,8 @@ import Footer from 'components/Globals/Footer/Footer';
 import Featured from 'components/Featured/Featured';
 import Campfire from 'components/Campfire/Campfire';
 import Music from 'components/Music/Music';
-import { Timer } from '@mui/icons-material';
-
+import Timer from 'components/Timer/Timer';
+import ErrorPage from 'components/ErrorPage'
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -36,6 +36,7 @@ function App() {
               <Route path="/music" element={<Music />} />
               <Route path="/timer" element={<Timer />} />
               <Route path="/" element={<Main />}/>
+              <Route path="*" element={<ErrorPage/>}/>
 
             </Routes>
             <Footer/>
