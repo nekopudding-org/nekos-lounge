@@ -13,7 +13,7 @@ function TrendingCarousel(props) {
             description: 'donut modeled in blender'
         },
         {
-            name:'Spacegame', 
+            name:'Project Mnemosyne', 
             link: '',
             imageURL: 'images/spacegame.png',
             description: 'spacegame - 2D platformer game'
