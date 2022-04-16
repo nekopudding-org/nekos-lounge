@@ -18,27 +18,27 @@ import Timer from 'components/Timer/Timer';
 import ErrorPage from 'components/ErrorPage'
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [timerOpen,setTimerOpen] = useState(true);
 
-  useEffect(()=> {
-    // document.documentElement.style.setProperty('--base',this.state.color);
-  },[])
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
         <Stack sx={{ flexFlow: 'row nowrap', minWidth: '100vw', minHeight: '100vh'}}>
-          <Sidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
+          <Sidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} setTimerOpen={setTimerOpen}/>
           <Stack sx={{flexGrow: 1}}>
+            <Timer open={timerOpen} setOpen={setTimerOpen}/>
             <Routes>
-              <Route path="/featured" element={<Featured />} />
-              <Route path="/campfire" element={<Campfire />} />
+              <Route exact path="/featured" element={<Featured />} />
+              <Route exact path="/campfire" element={<Campfire />} />
+              <Route exact path="/" element={<Main />}/>
+              <Route path="*" element={<ErrorPage/>}/>
+            </Routes>
+            {/* <Routes>
               <Route path="/music" element={<Music />} />
               <Route path="/timer" element={<Timer />} />
-              <Route path="/" element={<Main />}/>
-              <Route path="*" element={<ErrorPage/>}/>
-
-            </Routes>
+            </Routes> */}
             <Footer/>
           </Stack>
         </Stack>

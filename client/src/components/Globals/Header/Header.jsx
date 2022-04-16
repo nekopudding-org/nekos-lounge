@@ -3,6 +3,7 @@ import { AppBar,Box,Toolbar,IconButton,Typography,Button} from '@mui/material'
 import MenuIcon from "@mui/icons-material/Menu";
 
 import theme from 'theme';
+import Timer from 'components/Timer/Timer';
 
 function Header(props) {
   const {drawerOpen, drawerWidth, setDrawerOpen} = props;

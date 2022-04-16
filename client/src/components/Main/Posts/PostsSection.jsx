@@ -40,7 +40,7 @@ function PostsSection() {
           count={5} 
           color="secondary" 
           sx={{ 
-            '& .MuiPaginationItem-root.Mui-selected': {
+            '& .MuiPaginationItem-root.Mui-selected:hover': {
               bgcolor: theme.palette.secondary.main //don't change color if selected
             },
             '& .MuiPaginationItem-root:not(.Mui-selected):hover': {

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Drawer, List, ListItemIcon, ListItemButton,ListItemText,Divider} from '@mui/material'
+import SidebarItem from './SidebarItem';
 import {alpha, styled} from '@mui/styles'
 import { Link } from 'react-router-dom';
 import { common } from '@mui/material/colors';
@@ -46,7 +47,7 @@ const pageList = [
 ]
 
 function Sidebar(props) {
-  const {drawerOpen, setDrawerOpen} = props; 
+  const {drawerOpen, setDrawerOpen, setTimerOpen} = props; 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
@@ -74,7 +75,6 @@ function Sidebar(props) {
       PaperProps={{sx: {bgcolor: theme.palette.background.sidebar}}}
     >
           <List sx={{pt:0}}>
-
           <ListItemButton
               onClick={()=>setDrawerOpen(prev => !prev)}
               sx={{
@@ -97,38 +97,19 @@ function Sidebar(props) {
             </ListItemButton>
           {pageList.map((item, index) => (
             <React.Fragment key={index}>
-            <Link to={item.route}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: drawerOpen ? 'initial' : 'center',
-                  px: 2.5,
-                  '&:hover': {
-                    bgcolor: theme.palette.background.sidebarHover,
-                  },
-                  '&.Mui-selected:hover, &.Mui-selected': {
-                    bgcolor: theme.palette.background.sidebarSelected,
-                  },
-                }}
-                disableRipple
-                selected={selectedIndex === index}
-                onClick={() => handleListItemClick(index)}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: drawerOpen ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                <item.icon />
-                </ListItemIcon>
-                <ListItemText primary={item.title} sx={{ opacity: drawerOpen ? 1 : 0 }} />
-              </ListItemButton>
-            </Link>
+            {index <= 2 && 
+              <Link to={item.route}>
+                <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={handleListItemClick}/>
+              </Link>
+            }
+            {index === 3 && 
+              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index}/>
+            }
+            {index === 4 && 
+              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={()=> setTimerOpen(true)}/>
+            }
             <Divider/>
             </React.Fragment>
-            
           ))}
         </List>
       </Drawer>
