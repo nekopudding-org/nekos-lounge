@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardHeader, IconButton, Typography, Chip, Stack } from '@mui/material'
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography, Chip, Stack, Input } from '@mui/material'
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import CloseIcon from '@mui/icons-material/Close';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -99,7 +99,6 @@ function Timer(props) {
           ml: '5px', 
           py: '5px',
           width: '300px', 
-          height: '100px', 
           boxShadow: 6, 
           display: open ? 'flex' : 'none', 
           flexDirection: 'column',
@@ -120,12 +119,12 @@ function Timer(props) {
             </>
           } 
           sx={{ p: 1, pl: 2}}
-
         />
-        <CardActions sx={{display: 'flex', justifyContent:'right', pr: 2}}>
-          <Chip size='small' label="50min" variant="outlined" onClick={()=> setTimer(50*60)} />
-          <Chip size='small' label="30min" variant="outlined" onClick={()=> setTimer(30*60)} />
-          <Chip size='small' label="10min" variant="outlined" onClick={()=> setTimer(10*60)} />
+        <CardActions sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'right', pr: 2}}>
+          <Chip size='small' label="50m" variant="outlined" onClick={()=> setTimer(50*60)} />
+          <Chip size='small' label="25m" variant="outlined" onClick={()=> setTimer(25*60)} />
+          <Chip size='small' label="10m" variant="outlined" onClick={()=> setTimer(10*60)} />
+          <Chip size='small' label="5m" variant="outlined" onClick={()=> setTimer(5*60)} />
           <Chip size='small' label="5s" variant="outlined" onClick={()=> setTimer(5)} />
         </CardActions>
       </Card>
