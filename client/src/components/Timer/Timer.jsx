@@ -32,7 +32,6 @@ function Timer(props) {
         let deltaSeconds = Math.floor((Date.now() - start) / 1000);
         setRemainingTime(pausedTime - deltaSeconds);
       }, 500);
-      setWasPaused(false);
     }
 
     else if (!wasPaused){
@@ -41,6 +40,7 @@ function Timer(props) {
         setRemainingTime(startTime - deltaSeconds);
       }, 500);
     }
+    setWasPaused(false);
     return () => {clearInterval(interval)};
   },[playing])
 
@@ -50,7 +50,9 @@ function Timer(props) {
   }, [remainingTime])
 
   const handleStart = () => {
-    if (!wasPaused) setRemainingTime(startTime);
+    if (!wasPaused) {
+      setRemainingTime(startTime);
+    }
     setPlaying(true);
   }
   const handlePause = () => {
@@ -69,9 +71,8 @@ function Timer(props) {
   }
 
   const handleTimerEnd = () => {
-    console.log('time stopped')
+    if (playing) new Audio(process.env.PUBLIC_URL + 'hillside.mp3').play();
     handlePause();
-    //play some sound
   }
 
   const parseTime = () => {
@@ -125,6 +126,7 @@ function Timer(props) {
           <Chip size='small' label="50min" variant="outlined" onClick={()=> setTimer(50*60)} />
           <Chip size='small' label="30min" variant="outlined" onClick={()=> setTimer(30*60)} />
           <Chip size='small' label="10min" variant="outlined" onClick={()=> setTimer(10*60)} />
+          <Chip size='small' label="5s" variant="outlined" onClick={()=> setTimer(5)} />
         </CardActions>
       </Card>
       </Draggable>
