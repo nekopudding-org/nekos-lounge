@@ -11,12 +11,17 @@ import objectSupport from 'dayjs/plugin/objectSupport';
 import duration from 'dayjs/plugin/duration'
 
 function Timer(props) {
-  const {open,setOpen} = props;
+  const {open,setOpen,resetWindowPosition,setResetWindowPosition} = props;
   const [startTime, setStartTime] = useState(0)
   const [playing, setPlaying] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
   const [wasPaused, setWasPaused] = useState(false);
   const [pausedTime, setPausedTime] = useState(0)
+
+  useEffect(() => {
+    dayjs.extend(duration);
+    dayjs.extend(objectSupport);
+  },[]);
 
   useEffect(()=> {
     if (!playing) return;
@@ -26,7 +31,7 @@ function Timer(props) {
       interval = setInterval(() => {
         let deltaSeconds = Math.floor((Date.now() - start) / 1000);
         setRemainingTime(pausedTime - deltaSeconds);
-      }, 1000);
+      }, 500);
       setWasPaused(false);
     }
 
@@ -34,7 +39,7 @@ function Timer(props) {
       interval = setInterval(() => {
         let deltaSeconds = Math.floor((Date.now() - start) / 1000);
         setRemainingTime(startTime - deltaSeconds);
-      }, 1000);
+      }, 500);
     }
     return () => {clearInterval(interval)};
   },[playing])
@@ -74,14 +79,16 @@ function Timer(props) {
     const hours = Math.floor(time/3600); time %= 3600;
     const minutes = Math.floor(time/60); time %= 60;
     const seconds = Math.floor(time);
-    dayjs.extend(duration);
-    dayjs.extend(objectSupport)
     return dayjs({hour: hours, minute: minutes, second: seconds }).format('HH:mm:ss')
   }
 
   return (
     <>
-    <Draggable>
+    <Draggable
+      bounds={{left: 0, top: 0, right: window.innerWidth-400, bottom: window.innerHeight-150}}
+      position={resetWindowPosition ? {x: 0, y: 0} : null}
+      onDrag={()=> setResetWindowPosition(false)}
+    >
 
       <Card 
         variant='outlined' 

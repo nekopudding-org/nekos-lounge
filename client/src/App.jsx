@@ -19,6 +19,7 @@ import ErrorPage from 'components/ErrorPage'
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [timerOpen,setTimerOpen] = useState(true);
+  const [resetTimerWindow, setResetTimerWindow] = useState(false);
 
   return (
     <>
@@ -26,9 +27,19 @@ function App() {
         <CssBaseline />
         <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
         <Stack sx={{ flexFlow: 'row nowrap', minWidth: '100vw', minHeight: '100vh'}}>
-          <Sidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} setTimerOpen={setTimerOpen}/>
+          <Sidebar 
+            setDrawerOpen={setDrawerOpen} 
+            drawerOpen={drawerOpen} 
+            setTimerOpen={setTimerOpen} 
+            setResetTimerWindow={setResetTimerWindow}
+          />
           <Stack sx={{flexGrow: 1}}>
-            <Timer open={timerOpen} setOpen={setTimerOpen}/>
+            <Timer 
+              open={timerOpen} 
+              setOpen={setTimerOpen} 
+              resetWindowPosition={resetTimerWindow} 
+              setResetWindowPosition={setResetTimerWindow}
+            />
             <Routes>
               <Route exact path="/featured" element={<Featured />} />
               <Route exact path="/campfire" element={<Campfire />} />

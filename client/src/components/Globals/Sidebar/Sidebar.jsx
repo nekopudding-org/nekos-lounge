@@ -47,11 +47,16 @@ const pageList = [
 ]
 
 function Sidebar(props) {
-  const {drawerOpen, setDrawerOpen, setTimerOpen} = props; 
+  const {drawerOpen, setDrawerOpen, setTimerOpen, setResetTimerWindow} = props; 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
   };
+
+  const openTimer = () => {
+    setTimerOpen(true);
+    setResetTimerWindow(true)
+  }
 
   return (
     <>
@@ -106,7 +111,7 @@ function Sidebar(props) {
               <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index}/>
             }
             {index === 4 && 
-              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={()=> setTimerOpen(true)}/>
+              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={openTimer}/>
             }
             <Divider/>
             </React.Fragment>
