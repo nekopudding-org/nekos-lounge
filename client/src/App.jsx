@@ -1,4 +1,4 @@
-import {useState, useEffect, React} from 'react';
+import React, {useState, useEffect,useRef} from 'react';
 import { CssBaseline,Stack} from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
@@ -20,6 +20,7 @@ function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [timerOpen,setTimerOpen] = useState(true);
   const [resetTimerWindow, setResetTimerWindow] = useState(false);
+  const contentContainer = useRef(null)
 
   return (
     <>
@@ -33,8 +34,9 @@ function App() {
             setTimerOpen={setTimerOpen} 
             setResetTimerWindow={setResetTimerWindow}
           />
-          <Stack sx={{flexGrow: 1}}>
+          <Stack sx={{flexGrow: 1}} ref={contentContainer}>
             <Timer 
+              parent={contentContainer}
               open={timerOpen} 
               setOpen={setTimerOpen} 
               resetWindowPosition={resetTimerWindow} 

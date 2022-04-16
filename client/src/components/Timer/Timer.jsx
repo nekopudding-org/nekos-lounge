@@ -1,17 +1,20 @@
-import { Card, CardActions, CardContent, CardHeader, IconButton, Typography, Chip, Stack, Input } from '@mui/material'
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography, Chip, Stack, Input, Collapse } from '@mui/material'
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import CloseIcon from '@mui/icons-material/Close';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import Draggable from 'react-draggable';
 import dayjs from 'dayjs';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import duration from 'dayjs/plugin/duration'
+import theme from 'theme';
 
 function Timer(props) {
-  const {open,setOpen,resetWindowPosition,setResetWindowPosition} = props;
+  const {open,setOpen,resetWindowPosition,setResetWindowPosition, parent} = props;
+  const [expanded, setExpanded] = useState(true);
+  const cardContainer = useRef(null);
   const [startTime, setStartTime] = useState(0)
   const [playing, setPlaying] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
@@ -86,47 +89,59 @@ function Timer(props) {
   return (
     <>
     <Draggable
-      bounds={{left: 0, top: 0, right: window.innerWidth-400, bottom: window.innerHeight-150}}
+      bounds={{
+        left: 0, 
+        top: 0, 
+        right: (parent.current !== null? parent.current.offsetWidth : 0) - (cardContainer.current !== null? cardContainer.current.offsetWidth : 0), 
+        bottom: (parent.current !== null? parent.current.offsetHeight-45 : 0)-(cardContainer.current !== null ? cardContainer.current.offsetHeight : 0)
+      }}
       position={resetWindowPosition ? {x: 0, y: 0} : null}
       onDrag={()=> setResetWindowPosition(false)}
+      handle='.MuiCardHeader-root'
     >
-
       <Card 
         variant='outlined' 
         sx={{ 
           position: 'fixed', 
           mt: '50px', 
           ml: '5px', 
-          py: '5px',
           width: '300px', 
           boxShadow: 6, 
           display: open ? 'flex' : 'none', 
           flexDirection: 'column',
           zIndex: 10,
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
+        ref={cardContainer}
       >
         <CardHeader 
-          title={<Typography variant='h6'>{parseTime()}</Typography>}
-          action={
-            <>
-              <IconButton aria-label='minimize' size="small" onClick={handleStart}><PlayArrowIcon/></IconButton>
-              <IconButton aria-label='minimize' size="small" onClick={handlePause}><PauseIcon/></IconButton>
-              <IconButton aria-label='minimize' size="small" onClick={handleReset}><RestartAltIcon/></IconButton>
-
-              <IconButton aria-label='minimize' size="small"><MinimizeIcon fontSize='inherit'/></IconButton>
-              <IconButton aria-label="close" size="small" onClick={() => setOpen(false)}><CloseIcon fontSize='inherit'/></IconButton>
-            </>
-          } 
-          sx={{ p: 1, pl: 2}}
+          title={<Typography variant='h6' sx={{lineHeight: 1.4}}>{parseTime()}</Typography>}
+          sx={{ 
+            p: 1, 
+            pl: 2, 
+            display: 'flex',
+            my: 'auto',
+            bgcolor: theme.palette.background.default,
+          }}
         />
-        <CardActions sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'right', pr: 2}}>
-          <Chip size='small' label="50m" variant="outlined" onClick={()=> setTimer(50*60)} />
-          <Chip size='small' label="25m" variant="outlined" onClick={()=> setTimer(25*60)} />
-          <Chip size='small' label="10m" variant="outlined" onClick={()=> setTimer(10*60)} />
-          <Chip size='small' label="5m" variant="outlined" onClick={()=> setTimer(5*60)} />
-          <Chip size='small' label="5s" variant="outlined" onClick={()=> setTimer(5)} />
+        <CardActions sx={{mt: 0, right: 0, m: 'auto', position: 'absolute', display: 'flex', justifyContent:'right'}} disableSpacing>
+          <IconButton aria-label='minimize' size="small" onClick={handleStart}><PlayArrowIcon fontSize='inherit'/></IconButton>
+          <IconButton aria-label='minimize' size="small" onClick={handlePause}><PauseIcon fontSize='inherit'/></IconButton>
+          <IconButton aria-label='minimize' size="small" onClick={handleReset}><RestartAltIcon fontSize='inherit'/></IconButton>
+
+          <IconButton aria-label='minimize' size="small" onClick={()=>setExpanded(!expanded)} aria-expanded={expanded}><MinimizeIcon fontSize='inherit'/></IconButton>
+          <IconButton aria-label="close" size="small" onClick={() => setOpen(false)}><CloseIcon fontSize='inherit'/></IconButton>
         </CardActions>
+         <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardActions sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'right', pr: 2, pt: 2}}>
+            <Chip size='small' label="50m" variant="outlined" onClick={()=> setTimer(50*60)} />
+            <Chip size='small' label="25m" variant="outlined" onClick={()=> setTimer(25*60)} />
+            <Chip size='small' label="10m" variant="outlined" onClick={()=> setTimer(10*60)} />
+            <Chip size='small' label="5m" variant="outlined" onClick={()=> setTimer(5*60)} />
+            <Chip size='small' label="5s" variant="outlined" onClick={()=> setTimer(5)} />
+          </CardActions>
+         </Collapse>
+        
       </Card>
       </Draggable>
 
