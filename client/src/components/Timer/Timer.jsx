@@ -93,7 +93,7 @@ function Timer(props) {
         left: 0, 
         top: 0, 
         right: (parent.current !== null? parent.current.offsetWidth : 0) - (cardContainer.current !== null? cardContainer.current.offsetWidth : 0), 
-        bottom: (parent.current !== null? parent.current.offsetHeight-45 : 0)-(cardContainer.current !== null ? cardContainer.current.offsetHeight : 0)
+        bottom: window.innerHeight-45-(cardContainer.current !== null ? cardContainer.current.offsetHeight : 0)
       }}
       position={resetWindowPosition ? {x: 0, y: 0} : null}
       onDrag={()=> setResetWindowPosition(false)}

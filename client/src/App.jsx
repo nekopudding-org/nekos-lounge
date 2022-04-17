@@ -34,7 +34,7 @@ function App() {
             setTimerOpen={setTimerOpen} 
             setResetTimerWindow={setResetTimerWindow}
           />
-          <Stack sx={{flexGrow: 1,minHeight: '100vh', display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
+          <Stack sx={{flexGrow: 1, display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
             <Timer 
               parent={contentContainer}
               open={timerOpen} 
