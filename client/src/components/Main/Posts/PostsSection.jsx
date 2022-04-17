@@ -20,7 +20,7 @@ const postList = [
 function PostsSection() {
   return (
     <>
-    <Stack spacing={4} sx={{flexGrow:1}}>
+    <Stack spacing={4}>
       <Paper elevation={3} sx={{mx: 0}}>
         <Stack>
           {postList.map((item, index) => {

@@ -115,7 +115,7 @@ function Timer(props) {
         ref={cardContainer}
       >
         <CardHeader 
-          title={<Typography variant='h6' sx={{lineHeight: 1.4}}>{parseTime()}</Typography>}
+          title={<Typography variant='h6' sx={{lineHeight: 1.4, userSelect: 'none'}}>{parseTime()}</Typography>}
           sx={{ 
             p: 1, 
             pl: 2, 

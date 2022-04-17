@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar,Box,Toolbar,IconButton,Typography,Button} from '@mui/material'
+import { AppBar,Box,Toolbar,IconButton,Typography,Button, Badge} from '@mui/material'
 import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import theme from 'theme';
 import Timer from 'components/Timer/Timer';
@@ -47,8 +48,8 @@ function Header(props) {
               Neko's Lounge
             </Typography>
           </Box>
-
-          <Box sx={{flexGrow:0}}>
+          <IconButton sx={{mr: 1}}><Badge badgeContent={1} color="secondary"><NotificationsIcon/></Badge></IconButton>
+          <Box>
             <Button color="inherit"><Typography variant='body2'>Login</Typography></Button>
           </Box>
         </Toolbar>

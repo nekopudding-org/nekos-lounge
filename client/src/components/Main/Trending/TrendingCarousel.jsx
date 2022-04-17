@@ -3,23 +3,9 @@ import {Box} from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 
 import TrendingItem from './TrendingItem';
+import {projectList as trendingList} from 'assets/data/projectList'
 
 function TrendingCarousel(props) {
-    const trendingList = [
-        {
-            name:'Donut', 
-            link: '',
-            imageURL: 'images/donut.png',
-            description: 'donut modeled in blender'
-        },
-        {
-            name:'Project Mnemosyne', 
-            link: '',
-            imageURL: 'images/spacegame.png',
-            description: 'spacegame - 2D platformer game'
-        }
-    ]
-
     return (
         <>
             <Box sx={
