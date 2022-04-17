@@ -10,8 +10,6 @@ function FeaturedJumbotron(props) {
         sx={{ 
           backgroundColor: 'background.dark',
           height: {xs: 'auto', md: props.height},
-          // pt: 3,
-          // px: 6,
           pb: {xs: 3, md: 0},
           mt: '45px',
         }}

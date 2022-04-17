@@ -18,7 +18,7 @@ import theme from 'theme';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
-  width: {xs: '100%', md: drawerWidth},
+  width: {xs: '100vw', md: drawerWidth},
   
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -50,11 +50,15 @@ function Sidebar(props) {
   const {drawerOpen, setDrawerOpen, setTimerOpen, setResetTimerWindow} = props; 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (index) => {
-    setSelectedIndex(index);
+    setSelectedIndex(index); setDrawerOpen(false);
   };
 
+  const openPlaylist = () => {
+    setDrawerOpen(false);
+  }
+
   const openTimer = () => {
-    setTimerOpen(true);
+    setTimerOpen(true); setDrawerOpen(false);
     setResetTimerWindow(true)
   }
 
@@ -108,7 +112,7 @@ function Sidebar(props) {
               </Link>
             }
             {index === 3 && 
-              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index}/>
+              <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={openPlaylist}/>
             }
             {index === 4 && 
               <SidebarItem item={item} drawerOpen={drawerOpen} selectedIndex={selectedIndex} index={index} handleListItemClick={openTimer}/>

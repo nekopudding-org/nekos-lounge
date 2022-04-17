@@ -36,7 +36,7 @@ function Header(props) {
             aria-label="open drawer"
             edge="start"
             sx={{
-              mr: 5,
+              mr: {xs: 1, md:5},
               ...(drawerOpen && { display: "none" })
             }}
             onClick={()=> setDrawerOpen(true)}
@@ -44,7 +44,7 @@ function Header(props) {
             <MenuIcon />
           </IconButton>
           <Box sx={{flexGrow:1}}>
-            <Typography variant="h6" component="div" noWrap>
+            <Typography variant="h6" noWrap>
               Neko's Lounge
             </Typography>
           </Box>

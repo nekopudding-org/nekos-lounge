@@ -10,12 +10,18 @@ const Main = () => {
     sx={{ 
       flexWrap: 'nowrap',
       flex: '1 1 auto',
+      justifyContent: 'space-between',
       mx: 4,
       mt: 13,
       mb: 5
   }}>
-      <PostsSection/>
-    <TrendingCarousel fontSize={30}/>
+  <Box sx={{flex: '0 1 auto'}}>
+    <PostsSection/>
+  </Box>
+      
+    <Box sx={{display: 'flex', justifyContent:'center', flexGrow: 1}}>
+      <TrendingCarousel fontSize={30}/>
+    </Box>
   </Stack>
 )
 }

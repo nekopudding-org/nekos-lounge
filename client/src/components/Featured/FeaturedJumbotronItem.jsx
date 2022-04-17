@@ -34,7 +34,8 @@ function FeaturedJumbotronItem(props) {
             bgcolor: theme.palette.background.dark,
             justifyContent: 'center', 
             pl: 10, 
-            pb: {xs: 10, md: 0},
+            pt: {xs: 3, md: 0},
+            pb: {xs: 8, md: 0},
             textAlign: 'left'
           }}
         >

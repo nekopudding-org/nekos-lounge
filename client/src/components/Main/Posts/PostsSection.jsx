@@ -20,13 +20,13 @@ const postList = [
 function PostsSection() {
   return (
     <>
-    <Stack spacing={4}>
-      <Paper elevation={3} sx={{mx: 0}}>
-        <Stack>
+    <Stack spacing={4} sx={{maxWidth: {xs:'70vw', md: '70vw'}}}>
+      <Paper elevation={3} sx={{mx: 0,width: '100%'}}>
+        <Stack sx={{width: '100%'}}>
           {postList.map((item, index) => {
           return (
             <React.Fragment key={index}>
-            <Box sx={{maxWidth:'60rem', py:2, px:3}}>
+            <Box sx={{ py:2, px:3, width: '80%'}}>
               <Typography variant="h6" noWrap>{item.title}</Typography>
               <Typography variant="body2" paragraph noWrap>{item.content}</Typography>
             </Box>

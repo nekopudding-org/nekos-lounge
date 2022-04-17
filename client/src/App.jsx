@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useRef} from 'react';
-import { CssBaseline,Stack} from '@mui/material'
+import { CssBaseline,Stack, Box} from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
 import "@fontsource/open-sans";
@@ -34,7 +34,7 @@ function App() {
             setTimerOpen={setTimerOpen} 
             setResetTimerWindow={setResetTimerWindow}
           />
-          <Stack sx={{flexGrow: 1}} ref={contentContainer}>
+          <Stack sx={{flexGrow: 1,minHeight: '100vh', display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
             <Timer 
               parent={contentContainer}
               open={timerOpen} 

@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <>
         <Stack sx={{
-          padding: '20px 50px',
+          py: 3,
           backgroundColor: theme.palette.background.dark,
           flexGrow: 0
         }}>
