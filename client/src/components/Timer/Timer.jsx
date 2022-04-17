@@ -92,8 +92,8 @@ function Timer(props) {
       bounds={{
         left: 0, 
         top: 0, 
-        right: (parent.current !== null? parent.current.offsetWidth : 0) - (cardContainer.current !== null? cardContainer.current.offsetWidth : 0), 
-        bottom: window.innerHeight-45-(cardContainer.current !== null ? cardContainer.current.offsetHeight : 0)
+        right: (window.innerWidth - (parent.current && parent.current.offsetWidth < 850 ? 0 : 56)) - (cardContainer.current ? cardContainer.current.offsetWidth : 0), 
+        bottom: (window.innerHeight-45)-(cardContainer.current ? cardContainer.current.offsetHeight : 0)
       }}
       position={resetWindowPosition ? {x: 0, y: 0} : null}
       onDrag={()=> setResetWindowPosition(false)}
@@ -104,7 +104,7 @@ function Timer(props) {
         sx={{ 
           position: 'fixed', 
           mt: '50px', 
-          ml: '5px', 
+          ml: '2px', 
           width: '300px', 
           boxShadow: 6, 
           display: open ? 'flex' : 'none', 
