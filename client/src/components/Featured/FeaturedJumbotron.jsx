@@ -1,7 +1,7 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import FeaturedJumbotronItem from './FeaturedJumbotronItem'
-import { Box,Card } from '@mui/material';
+import { Box } from '@mui/material';
 
 function FeaturedJumbotron(props) {
   const {projectList} = props;

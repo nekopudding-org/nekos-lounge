@@ -1,5 +1,5 @@
-import React, {useState, useEffect,useRef} from 'react';
-import { CssBaseline,Stack, Box} from '@mui/material'
+import React, {useState, useRef} from 'react';
+import { CssBaseline,Stack } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
 import "@fontsource/open-sans";
@@ -42,6 +42,7 @@ function App() {
               resetWindowPosition={resetTimerWindow} 
               setResetWindowPosition={setResetTimerWindow}
             />
+            <Music/>
             <Routes>
               <Route exact path="/featured" element={<Featured />} />
               <Route exact path="/campfire" element={<Campfire />} />

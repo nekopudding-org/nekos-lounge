@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardHeader, IconButton, Typography, Chip, Stack, Input, Collapse } from '@mui/material'
+import { Card, CardActions, CardHeader, IconButton, Typography, Chip, Collapse } from '@mui/material'
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import CloseIcon from '@mui/icons-material/Close';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';

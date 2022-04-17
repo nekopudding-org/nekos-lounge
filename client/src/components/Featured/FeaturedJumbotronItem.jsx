@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Card,CardHeader,CardMedia,Box,Stack, Typography, Button,Link } from '@mui/material';
+import React from 'react'
+import { CardMedia,Box,Stack, Typography, Link } from '@mui/material';
 import { common } from "@mui/material/colors";
 import theme from 'theme';
 
@@ -42,7 +42,7 @@ function FeaturedJumbotronItem(props) {
           <Typography variant='h4' lineHeight={2}>{props.name.toUpperCase()}</Typography>
           <Typography variant='body1' lineHeight={3}>{props.description}</Typography>
           <Box>
-            <Link href={props.link} target='_blank'>LEARN MORE</Link>
+            <Link href={props.link} target='_blank' rel="noreferrer">LEARN MORE</Link>
           </Box>
         </Stack>
     </Stack>

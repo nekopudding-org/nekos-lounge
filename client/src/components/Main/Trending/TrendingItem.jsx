@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import {
   Card,
   CardMedia,
-  CardActions,
   CardHeader,
-  CardContent,
 } from "@mui/material";
 import { common } from "@mui/material/colors";
 import theme from "theme";

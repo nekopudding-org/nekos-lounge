@@ -2,9 +2,7 @@ import React from 'react';
 import { AppBar,Box,Toolbar,IconButton,Typography,Button, Badge} from '@mui/material'
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
 import theme from 'theme';
-import Timer from 'components/Timer/Timer';
 
 function Header(props) {
   const {drawerOpen, drawerWidth, setDrawerOpen} = props;
