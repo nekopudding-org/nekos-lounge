@@ -12,14 +12,17 @@ import duration from 'dayjs/plugin/duration'
 import theme from 'theme';
 
 function Timer(props) {
-  const {open,setOpen,resetWindowPosition,setResetWindowPosition, parent} = props;
+  const [startTime, setStartTime] = useState(0)
+  const [remainingTime, setRemainingTime] = useState(0);
+  const [pausedTime, setPausedTime] = useState(0)
+  const [playing, setPlaying] = useState(false);
+  const [wasPaused, setWasPaused] = useState(false);
   const [expanded, setExpanded] = useState(true);
   const cardContainer = useRef(null);
-  const [startTime, setStartTime] = useState(0)
-  const [playing, setPlaying] = useState(false);
-  const [remainingTime, setRemainingTime] = useState(0);
-  const [wasPaused, setWasPaused] = useState(false);
-  const [pausedTime, setPausedTime] = useState(0)
+  const {open,setOpen,resetWindowPosition,setResetWindowPosition, parent} = props;
+
+
+
 
   useEffect(() => {
     dayjs.extend(duration);
@@ -53,7 +56,7 @@ function Timer(props) {
   }, [remainingTime])
 
   const handleStart = () => {
-    if (!wasPaused) {
+    if (!wasPaused && !playing) {
       setRemainingTime(startTime);
     }
     setPlaying(true);
@@ -71,7 +74,9 @@ function Timer(props) {
 
   const setTimer = (time) => {
     setStartTime(time);
-    handleReset();
+    setPlaying(false);
+    setWasPaused(false);
+    setRemainingTime(time);
   }
 
   const handleTimerEnd = () => {
