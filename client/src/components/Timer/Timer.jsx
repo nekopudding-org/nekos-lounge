@@ -66,6 +66,7 @@ function Timer(props) {
   const handleReset = () => {
     setPlaying(false);
     setWasPaused(false);
+    setRemainingTime(startTime);
   }
 
   const setTimer = (time) => {

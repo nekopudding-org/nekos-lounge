@@ -22,10 +22,7 @@ function FeaturedJumbotronItem(props) {
               height: {xs: '300px', md:props.height}, 
               objectFit: 'cover',
               opacity: props.brightness,
-              filter: 'brightness(0.2)',
-              '&:hover': {
-                filter:'brightness(0.25)'
-              }
+              filter: 'brightness(0.25)',
         }}/>
         <Stack 
           sx={{
