@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {List, ListItemText,ListItemButton,ListItemIcon,Divider, Box, Input,Paper, IconButton,Typography, Stack, Slider} from '@mui/material'
 import ReactPlayer from 'react-player/youtube';
 import theme from 'theme';
@@ -17,6 +17,7 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 function Music(props) {
   const {playlistOpen, setPlaylistOpen} = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
+	const [isDragging, setIsDragging] = useState(false);
   const handleListItemClick = (index) => { setSelectedIndex(index); };
   const [player, setPlayer] = useState({
     url: 'https://www.youtube.com/playlist?list=PLmD_XJcT9TYFW9jZ8gcGYX05DzYRGr6xh',
@@ -30,7 +31,7 @@ function Music(props) {
     playing: false,
     volume: 0.5,
     stopOnUnmount: true,
-		seek: 0,
+		seek: 0, //fractional value from 0 to 1
   })
   const {url,controls,fallback,height,width,light,loop,muted,playing,volume, stopOnUnmount,seek} = player;
 
@@ -55,21 +56,33 @@ function Music(props) {
 	const handlePlay= () => {
 		setPlayer(prev => {return ({ ...prev, playing: !prev.playing })})
 	}
-	const setVolume = (event, newValue) => {
-		setPlayer( prev => {return ({ ...prev,volume: newValue })})
+	const setVolume = (event) => {
+		setPlayer( prev => {return ({ ...prev,volume: event.target.value })})
 	}
 	const toggleMute = () => {
 		setPlayer( prev => {return ({...prev,muted: !prev.muted})})
 	}
-	const setSeek = (event,newValue) => { //only call on release of dragging slider, else
-		setPlayer( prev => {return ({ ...prev,seek: newValue })})
-		playerRef.current && playerRef.current.seekTo(newValue);
+
+	const setSeekSlider = (event) => { //call onChange
+		setPlayer( prev => {return ({ ...prev,seek: event.target.value })})
+	}
+	const setSeek = (event) => { //only call on release of dragging slider onChangeCommitted
+		playerRef.current && playerRef.current.seekTo(seek);
 	}
 	const skipSong = () => { playerRef.current && playerRef.current.seekTo(0.99999); }
 	const [inputURL, setInputURL] = useState('')
 	const handleInputChange = (e) => {
 		setInputURL(e.target.value)
 	};
+
+	useEffect(() => { //fetches current playtime every 3 seconds, 
+		if (!playing) return; 
+		const interval = setInterval(()=>{
+			const currSeek = playerRef.current ? playerRef.current.getCurrentTime()/playerRef.current.getDuration() : 0;
+			if (!isDragging) setPlayer( prev => {return ({ ...prev,seek: currSeek })})
+		},3000)
+		return () => {clearInterval(interval)};
+	},[playing,isDragging]) //remember useEffect uses initial value of isDragging, need isDragging as dependency
 
   return (
     <>
@@ -147,7 +160,7 @@ function Music(props) {
           />
           <Box sx={{bgcolor: theme.palette.background.default, p:1, pb:0, height: 48, flexGrow: 0,}}>
 						<IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={handlePlay}>{!playing? <PlayArrowIcon fontSize='small'/> : <PauseIcon fontSize='small'/>}</IconButton>
-            <Box sx={{width: '120px', display: playlistOpen ? 'inline-block' : 'none', mx: 2}}><Slider size='small' value={seek} onChange={setSeek}/></Box>
+            <Box sx={{width: '120px', display: playlistOpen ? 'inline-block' : 'none', mx: 2}}><Slider size='small' value={seek} onChange={setSeekSlider} step={0.01} onChangeCommitted={setSeek} max={1} onMouseDown={()=>setIsDragging(true)} onMouseUp={()=>setIsDragging(false)}/></Box>
             <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={toggleMute}>{muted ? <VolumeOffIcon fontSize='small'/> : <VolumeUpIcon fontSize='small'/>}</IconButton>
             <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={skipSong}><SkipNextIcon fontSize='small'/></IconButton>
           </Box>

@@ -48,7 +48,7 @@ function Timer(props) {
     }
     setWasPaused(false);
     return () => {clearInterval(interval)};
-  },[playing])
+  },[playing]) //this is fine because every button will change the state of playing
 
   useEffect(()=>{
     if (remainingTime > 0) return;
