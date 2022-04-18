@@ -45,39 +45,31 @@ const pageList = [
 ]
 
 function Sidebar(props) {
-  const {drawerOpen, setDrawerOpen, setTimerOpen, setResetTimerWindow} = props; 
+  const {drawerOpen, setDrawerOpen, setTimerOpen, setResetTimerWindow, setPlaylistOpen} = props; 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleListItemClick = (index) => {
-    setSelectedIndex(index); setDrawerOpen(false);
-  };
 
-  const openPlaylist = () => {
-    setDrawerOpen(false);
-  }
-
-  const openTimer = () => {
-    setTimerOpen(true); setDrawerOpen(false);
-    setResetTimerWindow(true)
-  }
+  const handleListItemClick = (index) => { setSelectedIndex(index); setDrawerOpen(false); };
+  const openPlaylist = () => { setDrawerOpen(false); setPlaylistOpen(prev => !prev);}
+  const openTimer = () => { setTimerOpen(true); setDrawerOpen(false); setResetTimerWindow(true); }
 
   return (
     <>
       <Drawer 
-      sx={{
+        sx={{
           width: drawerWidth,
           flexShrink: 0,
           whiteSpace: 'nowrap',
           boxSizing: 'border-box',
           ...(drawerOpen && { //when open use the openedMixin style
-          ...openedMixin(theme),
-          '& .MuiDrawer-paper': openedMixin(theme),
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
           }),
           ...(!drawerOpen && {
-          ...closedMixin(theme),
-          '& .MuiDrawer-paper': closedMixin(theme),
-          display: {xs: "none", md:"flex"},
-        })
-      }}
+            ...closedMixin(theme),
+            '& .MuiDrawer-paper': closedMixin(theme),
+            display: {xs: "none", md:"flex"},
+          }),
+        }}
       variant='permanent'
       PaperProps={{sx: {bgcolor: theme.palette.background.sidebar}}}
     >

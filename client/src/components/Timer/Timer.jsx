@@ -109,7 +109,7 @@ function Timer(props) {
           boxShadow: 6, 
           display: open ? 'flex' : 'none', 
           flexDirection: 'column',
-          zIndex: 10,
+          zIndex: 1,
           justifyContent: 'space-between',
         }}
         ref={cardContainer}

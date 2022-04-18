@@ -54,7 +54,6 @@ function TrendingItem(props) {
             opacity: props.brightness,
             "&:hover": {
               opacity: props.hoverBrightness,
-              zIndex: -9999,
             },
           }}
         />

@@ -1,4 +1,4 @@
-import { Pagination, Paper,Box, Stack, Divider, Typography } from '@mui/material'
+import { Pagination, Paper,Box, Stack, Divider, Typography, Skeleton } from '@mui/material'
 import React from 'react'
 import theme from 'theme'
 
@@ -20,18 +20,20 @@ function PostsSection() {
   return (
     <>
     <Stack spacing={4} sx={{maxWidth: {xs:'70vw', md: '70vw'}}}>
-      <Paper elevation={3} sx={{mx: 0,width: '100%'}}>
-        <Stack sx={{width: '100%'}}>
+      <Paper elevation={3}>
+        <Stack>
           {postList.map((item, index) => {
           return (
             <React.Fragment key={index}>
-            <Box sx={{ py:2, px:3, width: '80%'}}>
+            <Box sx={{ py:2, pl:3, pr: 6, height:'112px'}}>
               <Typography variant="h6" noWrap>{item.title}</Typography>
               <Typography variant="body2" paragraph noWrap>{item.content}</Typography>
             </Box>
             <Divider sx={{borderBottomWidth: '2px'}}/>
             </React.Fragment>
           )})}
+          <Skeleton variant='rectangular' height='112px' animation='wave' sx={{bgcolor: theme.palette.background.paper}}/><Divider sx={{borderBottomWidth: '2px'}}/>
+          <Skeleton variant='rectangular' height='112px' animation='wave' sx={{bgcolor: theme.palette.background.paper}}/><Divider sx={{borderBottomWidth: '2px'}}/>
         </Stack>
       </Paper>
       <Box sx={{justifyContent:"center", display:'flex'}}>

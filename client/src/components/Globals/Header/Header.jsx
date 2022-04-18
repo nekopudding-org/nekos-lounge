@@ -25,7 +25,7 @@ function Header(props) {
               duration: theme.transitions.duration.enteringScreen
             })
           }),
-          backgroundColor: theme.palette.background.light,
+          bgcolor: theme.palette.background.light,
         }}
       >
         <Toolbar variant='dense'>

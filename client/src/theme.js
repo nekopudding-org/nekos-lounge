@@ -52,16 +52,15 @@ const theme = createTheme({
         fontFamily:"Open Sans",
         color: '#e2e2e2',
       },
-  
       card: {
         fontWeight: 300,
         color: 'white'
       },
-      content: {
-  
-      },
       title: {
         fontWeight: 800
+      },
+      bgText: {
+        color: '#748db8'
       }
     },
   });

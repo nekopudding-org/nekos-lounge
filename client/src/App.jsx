@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import { CssBaseline,Stack } from '@mui/material'
+import { CssBaseline,Stack,Box } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
 import "@fontsource/open-sans";
@@ -19,6 +19,7 @@ import ErrorPage from 'components/ErrorPage'
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [timerOpen,setTimerOpen] = useState(true);
+  const [playlistOpen, setPlaylistOpen] = useState(false); 
   const [resetTimerWindow, setResetTimerWindow] = useState(false);
   const contentContainer = useRef(null)
 
@@ -33,7 +34,12 @@ function App() {
             drawerOpen={drawerOpen} 
             setTimerOpen={setTimerOpen} 
             setResetTimerWindow={setResetTimerWindow}
+            setPlaylistOpen={setPlaylistOpen}
           />
+          <Box>
+            <Music drawerOpen={drawerOpen} playlistOpen={playlistOpen} setPlaylistOpen={setPlaylistOpen}/>
+          </Box>
+          
           <Stack sx={{flexGrow: 1, display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
             <Timer 
               parent={contentContainer}
@@ -42,7 +48,6 @@ function App() {
               resetWindowPosition={resetTimerWindow} 
               setResetWindowPosition={setResetTimerWindow}
             />
-            <Music/>
             <Routes>
               <Route exact path="/featured" element={<Featured />} />
               <Route exact path="/campfire" element={<Campfire />} />
