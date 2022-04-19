@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {List, ListItemText,ListItemButton,ListItemIcon,Divider, Box, Input,Paper, IconButton,Typography, Stack, Slider} from '@mui/material'
+import {List, ListItemButton,Divider, Box, Input,Paper, IconButton,Typography, Stack, Slider, CardActions, Chip} from '@mui/material'
 import ReactPlayer from 'react-player/youtube';
 import theme from 'theme';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -12,7 +12,12 @@ import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
-
+//react-player can't handle playlists inputted in this format, need to pass as array of urls
+const defaultPlaylists = [
+	'https://www.youtube.com/watch?v=KkVwuWH-woA&list=PLmD_XJcT9TYFW9jZ8gcGYX05DzYRGr6xh',
+	'https://www.youtube.com/watch?v=5RfqB76eHTQ&list=PLmD_XJcT9TYEc33QeCx0ii01kVBDkGS9D',
+	'https://www.youtube.com/watch?v=FQSHcl6TJb4&list=PLKDOdCjxOjzIFucHobwJpSK4-vAVXST90',
+]
 ///////////////////////////////////////////////           MAIN CONTENT            /////////////
 function Music(props) {
   const {playlistOpen, setPlaylistOpen} = props;
@@ -106,16 +111,23 @@ function Music(props) {
         }}
       >
         <Stack sx={{height: '100%',}}>
-          <Box sx={{bgcolor: theme.palette.background.default, p:1, height: 48}}>
-            <Input value={inputURL} onChange={handleInputChange} placeholder='Enter playlist link:' sx={{display: playlistOpen ? 'inline-block' : 'none'}}/>
+          <Box sx={{bgcolor: theme.palette.background.default, p:1, height: 80}}>
+            <Input value={inputURL} onChange={handleInputChange} placeholder='Enter playlist link:' sx={{display: playlistOpen ? 'inline-block' : 'none', fontSize: 14, mt: 0.5, width: 180}}/>
             <IconButton sx={{display: playlistOpen ? 'inline-block' : 'none', position: 'absolute', height: 40}} onClick={addToPlaylist}>
               <MusicNoteIcon/>
             </IconButton>
             <IconButton sx={{position: 'absolute', right: 0, borderRadius: 0}} onClick={()=> setPlaylistOpen(false)}>
               <ChevronLeftIcon/>
             </IconButton>
+
+						<Stack direction='row' spacing={1} sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'left', pt:1}}>
+							<Chip color='info' size='small' label="Misc." variant='outlined' onClick={()=> setInputURL(defaultPlaylists[0])} />
+							<Chip color='info' size='small' label="Study" variant="outlined" onClick={()=> setInputURL(defaultPlaylists[1])} />
+							<Chip color='info' size='small' label="Stardew" variant="outlined" onClick={()=> setInputURL(defaultPlaylists[2])} />
+						</Stack>
+
           </Box><Divider/>
-          <List sx={{pt:0, flexGrow: 1}}>
+          <List sx={{pt:0, flexGrow: 1, overflow: 'auto'}}>
             {playlist.map((item,index) => (
               <React.Fragment key={index}>
               <ListItemButton
@@ -133,7 +145,7 @@ function Music(props) {
                   <Typography variant='bgText'><DragHandleIcon fontSize='small'/></Typography>
                 </IconButton>
                 <Box sx={{height: 48,flexGrow: 1, p:1}} onClick={() => (handleListItemClick != null) && handleListItemClick(index)}>
-                  <Typography variant='bgText' noWrap>{item.title}</Typography>
+                  <Typography variant='bgText' noWrap fontSize={14}>{item.title}</Typography>
                 </Box>
                 <IconButton size='small' onClick={() => removeFromPlaylist(index)} sx={{mx:1}}>
                   <Typography variant='bgText'><CloseIcon fontSize='small'/></Typography>

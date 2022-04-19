@@ -49,7 +49,7 @@ function Sidebar(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleListItemClick = (index) => { setSelectedIndex(index); setDrawerOpen(false); };
-  const openPlaylist = () => { setDrawerOpen(false); setPlaylistOpen(prev => !prev);}
+  const openPlaylist = () => { setDrawerOpen(false); setPlaylistOpen(true);}
   const openTimer = () => { setTimerOpen(true); setDrawerOpen(false); setResetTimerWindow(true); }
 
   return (
