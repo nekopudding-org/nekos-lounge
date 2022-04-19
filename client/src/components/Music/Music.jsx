@@ -106,9 +106,9 @@ function Music(props) {
         }}
       >
         <Stack sx={{height: '100%',}}>
-          <Box sx={{bgcolor: theme.palette.background.default, p:1, pb:0, height: 48}}>
+          <Box sx={{bgcolor: theme.palette.background.default, p:1, height: 48}}>
             <Input value={inputURL} onChange={handleInputChange} placeholder='Enter playlist link:' sx={{display: playlistOpen ? 'inline-block' : 'none'}}/>
-            <IconButton sx={{display: playlistOpen ? 'inline' : 'none', position: 'absolute'}} onClick={addToPlaylist}>
+            <IconButton sx={{display: playlistOpen ? 'inline-block' : 'none', position: 'absolute', height: 40}} onClick={addToPlaylist}>
               <MusicNoteIcon/>
             </IconButton>
             <IconButton sx={{position: 'absolute', right: 0, borderRadius: 0}} onClick={()=> setPlaylistOpen(false)}>
@@ -158,9 +158,9 @@ function Music(props) {
             stopOnUnmount={stopOnUnmount}
 						ref={playerRef}
           />
-          <Box sx={{bgcolor: theme.palette.background.default, p:1, pb:0, height: 48, flexGrow: 0,}}>
+          <Box sx={{bgcolor: theme.palette.background.default, p:1, pb:3, height: 64, flexGrow: 0,display: 'flex'}}>
 						<IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={handlePlay}>{!playing? <PlayArrowIcon fontSize='small'/> : <PauseIcon fontSize='small'/>}</IconButton>
-            <Box sx={{width: '120px', display: playlistOpen ? 'inline-block' : 'none', mx: 2}}><Slider size='small' value={seek} onChange={setSeekSlider} step={0.01} onChangeCommitted={setSeek} max={1} onMouseDown={()=>setIsDragging(true)} onMouseUp={()=>setIsDragging(false)}/></Box>
+            <Box sx={{width: '120px', height: 32, display: playlistOpen ? 'inline-block' : 'none', mx: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}><Slider size='small' value={seek} onChange={setSeekSlider} step={0.01} onChangeCommitted={setSeek} max={1} onMouseDown={()=>setIsDragging(true)} onMouseUp={()=>setIsDragging(false)}/></Box>
             <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={toggleMute}>{muted ? <VolumeOffIcon fontSize='small'/> : <VolumeUpIcon fontSize='small'/>}</IconButton>
             <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={skipSong}><SkipNextIcon fontSize='small'/></IconButton>
           </Box>
