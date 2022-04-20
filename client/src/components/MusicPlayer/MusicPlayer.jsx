@@ -136,7 +136,6 @@ function MusicPlayer(props) {
           position: 'fixed',
           zIndex: 2,
           boxShadow:2,
-          overflowX: 'hidden',
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
