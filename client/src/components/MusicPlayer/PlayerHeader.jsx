@@ -10,7 +10,7 @@ function PlayerHeader(props) {
   return (
     <>
       <Box sx={{bgcolor: theme.palette.background.default, p:1, height: 80}}>
-        <Input value={inputQuery} onChange={handleInputChange} placeholder='Enter youtube link:' sx={{display: playlistOpen ? 'inline-block' : 'none', fontSize: 14, mt: 0.5, width: 180}}/>
+        <Input value={inputQuery} onChange={handleInputChange} placeholder='Enter yt query or link:' sx={{display: playlistOpen ? 'inline-block' : 'none', fontSize: 14, mt: 0.5, width: 180}}/>
         <IconButton sx={{display: playlistOpen ? 'inline-block' : 'none', position: 'absolute', height: 40}} onClick={addToPlaylist}>
           <MusicNoteIcon/>
         </IconButton>
