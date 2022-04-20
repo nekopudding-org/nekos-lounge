@@ -11,6 +11,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "youtube-playlist-getter": "^0.0.6"
+    "ytpl": "^2.3.0"
   }
 }
