@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {List, Divider, Box, Input,Paper, IconButton,Stack, Slider, Chip} from '@mui/material'
+import {List, Paper, Stack} from '@mui/material'
 import ReactPlayer from 'react-player/youtube';
 import theme from 'theme';
 
@@ -50,7 +50,8 @@ function MusicPlayer(props) {
           ...prev,
           ...res.data
         ])
-      }).catch((error) => { console.log(error); })
+      })
+      .catch((error) => { console.log(error); })
       .then(() => {
         //input error
       })
