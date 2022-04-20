@@ -2,16 +2,11 @@ import React, {useEffect, useRef, useState} from 'react'
 import {List, Divider, Box, Input,Paper, IconButton,Stack, Slider, Chip} from '@mui/material'
 import ReactPlayer from 'react-player/youtube';
 import theme from 'theme';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import PlaylistItem from './PlaylistItem';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import axios from 'axios';
+import PlayerFooter from './PlayerFooter';
+import PlayerHeader from './PlayerHeader';
 
 //react-player can't handle playlists inputted in this format, need to pass as array of urls
 const defaultPlaylists = [
@@ -20,13 +15,14 @@ const defaultPlaylists = [
 	'https://www.youtube.com/watch?v=FQSHcl6TJb4&list=PLKDOdCjxOjzIFucHobwJpSK4-vAVXST90',
 ]
 ///////////////////////////////////////////////           MAIN CONTENT            /////////////
-function Music(props) {
+function MusicPlayer(props) {
   const {playlistOpen, setPlaylistOpen} = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [inputURL, setInputURL] = useState('')
 	const [isDragging, setIsDragging] = useState(false);
   const handleListItemClick = (index) => { setSelectedIndex(index); };
   const [player, setPlayer] = useState({
-    url: 'https://www.youtube.com/playlist?list=PLmD_XJcT9TYFW9jZ8gcGYX05DzYRGr6xh',
+    url: '',
     controls: false,
     fallback: null,
     height: 0,
@@ -45,6 +41,8 @@ function Music(props) {
 
   const [playlist, setPlaylist] = useState([]);
   const addToPlaylist = () => { //call on input enter
+    if (playlist.length === 0) handlePlay(true);
+    setInputURL('');
 		if (inputURL && inputURL !== '') {
       axios.get('http://localhost:3002/playlist', {params: {url: inputURL}})
       .then((res) => {
@@ -57,13 +55,12 @@ function Music(props) {
         //input error
       })
     }
-		setInputURL('');
-    if (playlist.length === 0) handlePlay(true);
   }
   function changeSong(url) {
     setPlayer( prev => {return ({...prev,url: url})})
   }
 
+  const clearPlaylist = () => { setPlaylist([]);}
   const removeFromPlaylist = (i) => {
     setPlaylist(prev => prev.filter((item,index) => (index === i)  ? false : true));
   }
@@ -93,9 +90,8 @@ function Music(props) {
     playerRef.current && playerRef.current.seekTo(seek);
 	}
 	const skipSong = () => { playerRef.current && playerRef.current.seekTo(playerRef.current.getDuration()); }
-	const [inputURL, setInputURL] = useState('')
 	const handleInputChange = (e) => {
-		setInputURL(e.target.value)
+    if(e.target.value && e.target.value !== '') setInputURL(e.target.value)
 	};
 
   function handleSelectSong(index) {
@@ -112,6 +108,16 @@ function Music(props) {
 		return () => {clearInterval(interval)};
 	},[playing,isDragging]) //remember useEffect uses initial value of isDragging, need isDragging as dependency
 
+  useEffect(() => {
+    if (!playlist || selectedIndex > playlist.length - 1) {
+      changeSong('')
+      handlePlay(false);
+      setSelectedIndex(0);
+    } else {
+      changeSong(playlist[selectedIndex].url)
+    }
+  },[playlist,selectedIndex])
+
   return (
     <>
       <Paper
@@ -126,7 +132,6 @@ function Music(props) {
           zIndex: 2,
           boxShadow:2,
           overflowX: 'hidden',
-          // display: playlistOpen ? 'block' : 'none',
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -134,25 +139,19 @@ function Music(props) {
         }}
       >
         <Stack sx={{height: '100%',}}>
-          <Box sx={{bgcolor: theme.palette.background.default, p:1, height: 80}}>
-            <Input value={inputURL} onChange={handleInputChange} placeholder='Enter playlist link:' sx={{display: playlistOpen ? 'inline-block' : 'none', fontSize: 14, mt: 0.5, width: 180}}/>
-            <IconButton sx={{display: playlistOpen ? 'inline-block' : 'none', position: 'absolute', height: 40}} onClick={addToPlaylist}>
-              <MusicNoteIcon/>
-            </IconButton>
-            <IconButton sx={{position: 'absolute', right: 0, borderRadius: 0}} onClick={()=> setPlaylistOpen(false)}>
-              <ChevronLeftIcon/>
-            </IconButton>
-
-						<Stack direction='row' spacing={1} sx={{display: 'flex', flexWrap: 'wrap', justifyContent:'left', pt:1}}>
-							<Chip color='info' size='small' label="Misc." variant='outlined' onClick={()=> setInputURL(defaultPlaylists[0])} />
-							<Chip color='info' size='small' label="Study" variant="outlined" onClick={()=> setInputURL(defaultPlaylists[1])} />
-							<Chip color='info' size='small' label="Stardew" variant="outlined" onClick={()=> setInputURL(defaultPlaylists[2])} />
-						</Stack>
-
-          </Box><Divider/>
+          <PlayerHeader 
+            inputURL={inputURL} 
+            playlistOpen={playlistOpen}
+            handleInputChange={handleInputChange}
+            addToPlaylist={addToPlaylist}
+            setPlaylistOpen={setPlaylistOpen}
+            setInputURL={setInputURL}
+            defaultPlaylists={defaultPlaylists}
+            clearPlaylist={clearPlaylist}
+          />
           <List sx={{pt:0, flexGrow: 1, overflow: 'auto'}}>
             {playlist.map((item,index) => (
-              <PlaylistItem item={item} index={index} selectedIndex={selectedIndex} handleSelectSong={handleSelectSong} removeFromPlaylist={removeFromPlaylist}/>
+              <PlaylistItem key={index} item={item} index={index} selectedIndex={selectedIndex} handleSelectSong={handleSelectSong} removeFromPlaylist={removeFromPlaylist}/>
             ))}
           </List>
           <ReactPlayer 
@@ -171,16 +170,22 @@ function Music(props) {
 						ref={playerRef}
             onEnded={handleEnd}
           />
-          <Box sx={{bgcolor: theme.palette.background.default, p:1, pb:3, height: 64, flexGrow: 0,display: 'flex'}}>
-						<IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={()=>handlePlay(!playing)}>{!playing? <PlayArrowIcon fontSize='small'/> : <PauseIcon fontSize='small'/>}</IconButton>
-            <Box sx={{width: '120px', height: 32, display: playlistOpen ? 'inline-block' : 'none', mx: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}><Slider size='small' value={seek} onChange={setSeekSlider} step={0.01} onChangeCommitted={setSeek} max={1} onMouseDown={()=>setIsDragging(true)}/></Box>
-            <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={toggleMute}>{muted ? <VolumeOffIcon fontSize='small'/> : <VolumeUpIcon fontSize='small'/>}</IconButton>
-            <IconButton size='small' sx={{display: playlistOpen ? 'inline' : 'none'}} onClick={skipSong}><SkipNextIcon fontSize='small'/></IconButton>
-          </Box>
+          <PlayerFooter
+            handlePlay={handlePlay}
+            setSeek={setSeek}
+            setSeekSlider={setSeekSlider}
+            setIsDragging={setIsDragging}
+            toggleMute={toggleMute}
+            skipSong={skipSong}
+            playlistOpen={playlistOpen}
+            seek={seek}
+            muted={muted}
+            playing={playing}
+          />
         </Stack>  
       </Paper>
     </>
   )
 }
 
-export default Music
+export default MusicPlayer

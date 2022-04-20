@@ -13,9 +13,10 @@ import Main from 'components/Main/Main'
 import Footer from 'components/Globals/Footer/Footer';
 import Featured from 'components/Featured/Featured';
 import Campfire from 'components/Campfire/Campfire';
-import Music from 'components/Music/Music';
+import MusicPlayer from 'components/MusicPlayer/MusicPlayer';
 import Timer from 'components/Timer/Timer';
 import ErrorPage from 'components/ErrorPage'
+
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [timerOpen,setTimerOpen] = useState(true);
@@ -37,7 +38,7 @@ function App() {
             setPlaylistOpen={setPlaylistOpen}
           />
           <Box>
-            <Music drawerOpen={drawerOpen} playlistOpen={playlistOpen} setPlaylistOpen={setPlaylistOpen}/>
+            <MusicPlayer drawerOpen={drawerOpen} playlistOpen={playlistOpen} setPlaylistOpen={setPlaylistOpen}/>
           </Box>
           
           <Stack sx={{flexGrow: 1, display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
