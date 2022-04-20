@@ -7,7 +7,7 @@ import theme from 'theme';
 function PlaylistItem(props) {
   const {index,item, selectedIndex, handleSelectSong, removeFromPlaylist} = props;
   return (
-    <React.Fragment key={index}>
+    <>
       <ListItemButton
         sx={{
           display: 'flex',
@@ -30,7 +30,7 @@ function PlaylistItem(props) {
         </IconButton>
       </ListItemButton>
       <Divider />
-    </React.Fragment>
+    </>
   )
 }
 

@@ -18,7 +18,7 @@ const defaultPlaylists = [
 function MusicPlayer(props) {
   const {playlistOpen, setPlaylistOpen} = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [inputURL, setInputURL] = useState('')
+  const [inputQuery, setInputQuery] = useState('')
 	const [isDragging, setIsDragging] = useState(false);
   const handleListItemClick = (index) => { setSelectedIndex(index); };
   const [player, setPlayer] = useState({
@@ -42,9 +42,9 @@ function MusicPlayer(props) {
   const [playlist, setPlaylist] = useState([]);
   const addToPlaylist = () => { //call on input enter
     if (playlist.length === 0) handlePlay(true);
-    setInputURL('');
-		if (inputURL && inputURL !== '') {
-      axios.get('http://localhost:3002/playlist', {params: {url: inputURL}})
+    setInputQuery('');
+		if (inputQuery && inputQuery !== '') {
+      axios.get('http://localhost:3002/ytsearch', {params: {url: inputQuery}})
       .then((res) => {
         setPlaylist(prev => [
           ...prev,
@@ -92,11 +92,11 @@ function MusicPlayer(props) {
 	}
 	const skipSong = () => { playerRef.current && playerRef.current.seekTo(playerRef.current.getDuration()); }
 	const handleInputChange = (e) => {
-    if(e.target.value && e.target.value !== '') setInputURL(e.target.value)
+    if(e.target.value && e.target.value !== '') setInputQuery(e.target.value)
 	};
 
   function handleSelectSong(index) {
-    changeSong(playlist[index].url);
+    playlist[index] && changeSong(playlist[index].url);
     (handleListItemClick != null) && handleListItemClick(index)
   }
 
@@ -110,6 +110,10 @@ function MusicPlayer(props) {
 	},[playing,isDragging]) //remember useEffect uses initial value of isDragging, need isDragging as dependency
 
   useEffect(() => {
+    //limit playlist length to 200 for performance reasons
+    if (playlist.length > 200) {
+      setPlaylist(playlist.slice(0,200));
+    }
     if (!playlist || selectedIndex > playlist.length - 1) {
       changeSong('')
       handlePlay(false);
@@ -141,12 +145,12 @@ function MusicPlayer(props) {
       >
         <Stack sx={{height: '100%',}}>
           <PlayerHeader 
-            inputURL={inputURL} 
+            inputQuery={inputQuery} 
             playlistOpen={playlistOpen}
             handleInputChange={handleInputChange}
             addToPlaylist={addToPlaylist}
             setPlaylistOpen={setPlaylistOpen}
-            setInputURL={setInputURL}
+            setInputQuery={setInputQuery}
             defaultPlaylists={defaultPlaylists}
             clearPlaylist={clearPlaylist}
           />
