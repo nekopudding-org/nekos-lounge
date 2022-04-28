@@ -44,7 +44,7 @@ function MusicPlayer(props) {
     if (playlist.length === 0) handlePlay(true);
     setInputQuery('');
 		if (inputQuery && inputQuery !== '') {
-      axios.get('http://localhost:3002/ytsearch', {params: {url: inputQuery}})
+      axios.get('https://9l2emw5n86.execute-api.us-west-2.amazonaws.com/staging/ytsearch', {params: {url: inputQuery}})
       .then((res) => {
         setPlaylist(prev => [
           ...prev,
