@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ytsearch",
+            "server",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ytsearch",
+                  "server",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "nekosloungeclientLambdaRoled3ede7c2",
+            "nekosloungeclientLambdaRolecd779368",
             {
               "Fn::Join": [
                 "",
                 [
-                  "nekosloungeclientLambdaRoled3ede7c2",
+                  "nekosloungeclientLambdaRolecd779368",
                   "-",
                   {
                     "Ref": "env"

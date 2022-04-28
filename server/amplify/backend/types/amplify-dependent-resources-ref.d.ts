@@ -1,17 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-    "auth": {
-        "nekosloungeclient6ddddb78": {
-            "IdentityPoolId": "string",
-            "IdentityPoolName": "string",
-            "UserPoolId": "string",
-            "UserPoolArn": "string",
-            "UserPoolName": "string",
-            "AppClientIDWeb": "string",
-            "AppClientID": "string"
-        }
-    },
     "function": {
-        "ytsearch": {
+        "server": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
