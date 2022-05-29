@@ -16,7 +16,7 @@ const defaultPlaylists = [
 ]
 ///////////////////////////////////////////////           MAIN CONTENT            /////////////
 function MusicPlayer(props) {
-  const {playlistOpen, setPlaylistOpen} = props;
+  const {playlistOpen, setPlaylistOpen, windowD, appBarHeight} = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [inputQuery, setInputQuery] = useState('')
 	const [isDragging, setIsDragging] = useState(false);
@@ -100,6 +100,13 @@ function MusicPlayer(props) {
     (handleListItemClick != null) && handleListItemClick(index)
   }
 
+  useEffect(()=>{ //on load, load the last playlist
+    const pl = JSON.parse(localStorage.getItem("playlist"));
+    if (pl !== null) {
+      setPlaylist(pl);
+    }
+  },[])
+
 	useEffect(() => { //fetches current playtime every 3 seconds, 
 		if (!playing) return; 
 		const interval = setInterval(()=>{
@@ -114,22 +121,23 @@ function MusicPlayer(props) {
     if (playlist.length > 200) {
       setPlaylist(playlist.slice(0,200));
     }
-    if (!playlist || selectedIndex > playlist.length - 1) {
+    if (!playlist || selectedIndex > playlist.length - 1) { //if reached end of playlist
       changeSong('')
       handlePlay(false);
       setSelectedIndex(0);
-    } else {
+    } else { //go to next song
       changeSong(playlist[selectedIndex].url)
     }
+    localStorage.setItem("playlist", JSON.stringify(playlist)); //storage playlist in localStorage
   },[playlist,selectedIndex])
 
   return (
     <>
       <Paper
         sx={{
-          pt: '45px',
           width: playlistOpen ? 260 : 0,
-          height: '100vh',
+          mt: appBarHeight + "px",
+          height: windowD.height - appBarHeight,
           bgcolor: theme.palette.background.paper,
           overflowX: 'hidden',
           borderRadius: 0,
@@ -142,7 +150,7 @@ function MusicPlayer(props) {
           }),
         }}
       >
-        <Stack sx={{height: '100%',}}>
+        <Stack sx={{height: "100%"}}>
           <PlayerHeader 
             inputQuery={inputQuery} 
             playlistOpen={playlistOpen}

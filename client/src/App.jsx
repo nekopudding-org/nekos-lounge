@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { CssBaseline,Stack,Box } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 
@@ -23,12 +23,20 @@ function App() {
   const [playlistOpen, setPlaylistOpen] = useState(false); 
   const [resetTimerWindow, setResetTimerWindow] = useState(false);
   const contentContainer = useRef(null)
+  const [windowD, setWindowD] = useState({width: window.innerWidth, height: window.innerHeight});
+  const appBarHeight = '48';
+
+  useEffect(()=>{
+    window.addEventListener('resize',()=>{
+      setWindowD({width: window.innerWidth, height: window.innerHeight});
+    })
+  },[])
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
+        <Header drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} appBarHeight={appBarHeight}/>
         <Stack sx={{ flexFlow: 'row nowrap', minWidth: '100vw', minHeight: '100vh'}}>
           <Sidebar 
             setDrawerOpen={setDrawerOpen} 
@@ -38,7 +46,7 @@ function App() {
             setPlaylistOpen={setPlaylistOpen}
           />
           <Box>
-            <MusicPlayer drawerOpen={drawerOpen} playlistOpen={playlistOpen} setPlaylistOpen={setPlaylistOpen}/>
+            <MusicPlayer drawerOpen={drawerOpen} playlistOpen={playlistOpen} setPlaylistOpen={setPlaylistOpen} appBarHeight={appBarHeight} windowD={windowD}/>
           </Box>
           
           <Stack sx={{flexGrow: 1, display: drawerOpen ? {xs: 'none', md:'block'} : 'block'}} ref={contentContainer}>
@@ -48,6 +56,7 @@ function App() {
               setOpen={setTimerOpen} 
               resetWindowPosition={resetTimerWindow} 
               setResetWindowPosition={setResetTimerWindow}
+              windowD={windowD}
             />
             <Routes>
               <Route exact path="/featured" element={<Featured />} />

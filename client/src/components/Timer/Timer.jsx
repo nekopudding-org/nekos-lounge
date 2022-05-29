@@ -19,7 +19,7 @@ function Timer(props) {
   const [wasPaused, setWasPaused] = useState(false);
   const [expanded, setExpanded] = useState(true);
   const cardContainer = useRef(null);
-  const {open,setOpen,resetWindowPosition,setResetWindowPosition, parent} = props;
+  const {open,setOpen,resetWindowPosition,setResetWindowPosition, parent, windowD} = props;
 
 
 
@@ -98,8 +98,8 @@ function Timer(props) {
       bounds={{
         left: 0, 
         top: 0, 
-        right: (window.innerWidth - (parent.current && parent.current.offsetWidth < 850 ? 0 : 56)) - (cardContainer.current ? cardContainer.current.offsetWidth : 0), 
-        bottom: (window.innerHeight-45)-(cardContainer.current ? cardContainer.current.offsetHeight : 0)
+        right: (windowD.width - (parent.current && parent.current.offsetWidth < 850 ? 0 : 56)) - (cardContainer.current ? cardContainer.current.offsetWidth : 0), 
+        bottom: (windowD.height-45)-(cardContainer.current ? cardContainer.current.offsetHeight : 0)
       }}
       position={resetWindowPosition ? {x: 0, y: 0} : null}
       onDrag={()=> setResetWindowPosition(false)}
