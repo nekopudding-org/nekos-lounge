@@ -31,7 +31,7 @@ function MusicPlayer(props) {
     loop: false,
     muted: false,
     playing: false,
-    volume: 0.5,
+    volume: 0.8,
     stopOnUnmount: true,
 		seek: 0, //fractional value from 0 to 1
   })
@@ -58,7 +58,10 @@ function MusicPlayer(props) {
     }
   }
   function changeSong(url) {
-    setPlayer( prev => {return ({...prev,url: url})})
+    setPlayer( prev => {return ({...prev,url: url, playing: false})})
+    setTimeout(()=> {
+      setPlayer(prev => {return({...prev,playing: true})})
+    },1000)
   }
 
   const clearPlaylist = () => { setPlaylist([]);}
@@ -75,15 +78,15 @@ function MusicPlayer(props) {
     }
     handleSelectSong(selectedIndex + 1);
   }
-	const setVolume = (event) => { //called on volume slider
-		setPlayer( prev => {return ({ ...prev,volume: event.target.value })})
-	}
 	const toggleMute = () => { //call on mute button press
 		setPlayer( prev => {return ({...prev,muted: !prev.muted})})
 	}
 
 	const setSeekSlider = (event) => { //call onChange
 		setPlayer( prev => {return ({ ...prev,seek: event.target.value })})
+	}
+  const setVolumeSlider = (event) => { //call onChange
+		setPlayer( prev => {return ({ ...prev,volume: event.target.value })})
 	}
 	const setSeek = (event) => { //only call on release of dragging slider onChangeCommitted
     setIsDragging(false);
@@ -189,10 +192,12 @@ function MusicPlayer(props) {
             setIsDragging={setIsDragging}
             toggleMute={toggleMute}
             skipSong={skipSong}
+            setVolumeSlider={setVolumeSlider}
             playlistOpen={playlistOpen}
             seek={seek}
             muted={muted}
             playing={playing}
+            volume={volume}
           />
         </Stack>  
       </Paper>

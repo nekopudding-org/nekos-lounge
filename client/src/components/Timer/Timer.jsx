@@ -80,7 +80,8 @@ function Timer(props) {
   }
 
   const handleTimerEnd = () => {
-    if (playing) new Audio(process.env.PUBLIC_URL + 'hillside.mp3').play();
+    const audioLink = "https://amplify-amplify4f69f30787514-staging-74709-deployment.s3.us-west-2.amazonaws.com/public/hillside.mp3";
+    if (playing) new Audio(audioLink).play();
     handlePause();
   }
 
