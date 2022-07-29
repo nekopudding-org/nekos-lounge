@@ -1,1 +1,1 @@
-site deployed on https://nekopudding-org.github.io/nekos_lounge/
+site deployed on https://nekopudding-org.github.io/nekos-lounge/
