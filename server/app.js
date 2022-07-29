@@ -5,7 +5,7 @@ const ytsr = require('ytsr');
 const ytpl = require('ytpl');
 
 const app = express()
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
