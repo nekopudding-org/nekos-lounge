@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/nekos_lounge/static/css/main.0d17911e.css",
-    "main.js": "/nekos_lounge/static/js/main.1fcbfbbd.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/nekos_lounge/static/js/787.c4e7f8f9.chunk.js",
-    "static/media/open-sans-all-400-normal.woff": "/nekos_lounge/static/media/open-sans-all-400-normal.fd1a30188fbba33c1971.woff",
-    "static/media/open-sans-cyrillic-ext-400-normal.woff2": "/nekos_lounge/static/media/open-sans-cyrillic-ext-400-normal.432abaf385d938750963.woff2",
-    "static/media/open-sans-latin-400-normal.woff2": "/nekos_lounge/static/media/open-sans-latin-400-normal.a2d02404d087c7c068d4.woff2",
-    "static/media/open-sans-latin-ext-400-normal.woff2": "/nekos_lounge/static/media/open-sans-latin-ext-400-normal.0950a0dbc206706736db.woff2",
-    "static/media/open-sans-cyrillic-400-normal.woff2": "/nekos_lounge/static/media/open-sans-cyrillic-400-normal.8c8b009e2308cfd36674.woff2",
-    "static/media/open-sans-greek-400-normal.woff2": "/nekos_lounge/static/media/open-sans-greek-400-normal.f4df5aa87d97ffdd65c4.woff2",
-    "static/media/open-sans-hebrew-400-normal.woff2": "/nekos_lounge/static/media/open-sans-hebrew-400-normal.abf447351bfd65fe2d5d.woff2",
-    "static/media/open-sans-vietnamese-400-normal.woff2": "/nekos_lounge/static/media/open-sans-vietnamese-400-normal.1970138327ca2599f2c5.woff2",
-    "static/media/open-sans-greek-ext-400-normal.woff2": "/nekos_lounge/static/media/open-sans-greek-ext-400-normal.7f0c7c378a3ca829b189.woff2",
-    "index.html": "/nekos_lounge/index.html",
-    "main.0d17911e.css.map": "/nekos_lounge/static/css/main.0d17911e.css.map",
-    "main.1fcbfbbd.js.map": "/nekos_lounge/static/js/main.1fcbfbbd.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/nekos_lounge/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/nekos-lounge/static/css/main.56074596.css",
+    "main.js": "/nekos-lounge/static/js/main.0ddbdc91.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/nekos-lounge/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/open-sans-all-400-normal.woff": "/nekos-lounge/static/media/open-sans-all-400-normal.fd1a30188fbba33c1971.woff",
+    "static/media/open-sans-cyrillic-ext-400-normal.woff2": "/nekos-lounge/static/media/open-sans-cyrillic-ext-400-normal.432abaf385d938750963.woff2",
+    "static/media/open-sans-latin-400-normal.woff2": "/nekos-lounge/static/media/open-sans-latin-400-normal.a2d02404d087c7c068d4.woff2",
+    "static/media/open-sans-latin-ext-400-normal.woff2": "/nekos-lounge/static/media/open-sans-latin-ext-400-normal.0950a0dbc206706736db.woff2",
+    "static/media/open-sans-cyrillic-400-normal.woff2": "/nekos-lounge/static/media/open-sans-cyrillic-400-normal.8c8b009e2308cfd36674.woff2",
+    "static/media/open-sans-greek-400-normal.woff2": "/nekos-lounge/static/media/open-sans-greek-400-normal.f4df5aa87d97ffdd65c4.woff2",
+    "static/media/open-sans-hebrew-400-normal.woff2": "/nekos-lounge/static/media/open-sans-hebrew-400-normal.abf447351bfd65fe2d5d.woff2",
+    "static/media/open-sans-vietnamese-400-normal.woff2": "/nekos-lounge/static/media/open-sans-vietnamese-400-normal.1970138327ca2599f2c5.woff2",
+    "static/media/open-sans-greek-ext-400-normal.woff2": "/nekos-lounge/static/media/open-sans-greek-ext-400-normal.7f0c7c378a3ca829b189.woff2",
+    "index.html": "/nekos-lounge/index.html",
+    "main.56074596.css.map": "/nekos-lounge/static/css/main.56074596.css.map",
+    "main.0ddbdc91.js.map": "/nekos-lounge/static/js/main.0ddbdc91.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/nekos-lounge/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d17911e.css",
-    "static/js/main.1fcbfbbd.js"
+    "static/css/main.56074596.css",
+    "static/js/main.0ddbdc91.js"
   ]
 }
